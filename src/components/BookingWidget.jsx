@@ -1,0 +1,1426 @@
+ function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }import React, { useState, } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import logo from "../Images/Sahil_hair_expert.png";
+import {
+ 
+  ChevronLeft, 
+  ChevronRight, 
+  Clock, 
+  Calendar as CalendarIcon, 
+  Star, 
+  Check, 
+  Phone, 
+  MapPin, 
+  Sparkles, 
+  Scissors, 
+  ArrowLeft,
+  Smile,
+  Instagram,
+  Facebook,
+  Youtube,
+  Clock4,
+  ExternalLink,
+  Download,
+
+} from "lucide-react";
+
+// Existing Services Data Reorganized for Setmore Style
+const serviceCategories = [
+  { id: "all", name: "All Services" },
+  { id: "packages", name: "Luxury Packages" },
+  { id: "styling", name: "Hair Styling" },
+  { id: "treatments", name: "Hair Treatments" },
+  { id: "individual", name: "Individual Grooming" }
+];
+
+const services = [
+  {
+    id: "essential-grooming",
+    title: "Essential Grooming Package",
+    category: "packages",
+    price: "₹500",
+    numericPrice: 500,
+    duration: "45 min",
+    description: "Standard styled haircut, refreshing hair wash, and professional beard sculpting with razor lines."
+  },
+  {
+    id: "signature-experience",
+    title: "The Signature Experience",
+    category: "packages",
+    price: "₹1,500",
+    numericPrice: 1500,
+    duration: "90 min",
+    description: "Sahil's signature precision haircut, luxurious hot-towel beard design, specialized gold facial massage, and deep conditioning hair spa."
+  },
+  {
+    id: "bridal-groom-royale",
+    title: "Bridal / Groom Royale",
+    category: "packages",
+    price: "₹8,000",
+    numericPrice: 8000,
+    duration: "180 min",
+    description: "Full royal styling, premium HD airbrush makeup, active scalp hair treatment, and exclusive consultation for your special day."
+  },
+  {
+    id: "signature-styling",
+    title: "Signature Hair Styling",
+    category: "styling",
+    price: "₹400",
+    numericPrice: 400,
+    duration: "30 min",
+    description: "Precision couture haircuts and custom styling tailored to your facial structure and hair density."
+  },
+  {
+    id: "bridal-makeover",
+    title: "Bridal Royale Makeover",
+    category: "styling",
+    price: "₹6,000",
+    numericPrice: 6000,
+    duration: "150 min",
+    description: "High-end luxurious bridal makeover, signature registry makeup, premium hair curls or updos tailored to adornment settings."
+  },
+  {
+    id: "wig-hair-patch",
+    title: "Wig & Hair Patch",
+    category: "treatments",
+    price: "₹12,000",
+    numericPrice: 12000,
+    duration: "120 min",
+    description: "Non-surgical high-density medical grade custom hair patches and wigs. Features custom clipping/grafting for high natural looks."
+  },
+  {
+    id: "perming-texture",
+    title: "Perming & Texture Art",
+    category: "treatments",
+    price: "₹3,500",
+    numericPrice: 3500,
+    duration: "90 min",
+    description: "Professional texture styling, root perming, spiral voluming waves with luxury chemical formulas that preserve look and vitality."
+  },
+  {
+    id: "hair-spa-healing",
+    title: "Hair Spa & Healing",
+    category: "treatments",
+    price: "₹1,200",
+    numericPrice: 1200,
+    duration: "60 min",
+    description: "Mineral oil-nourishing scalp massage, custom steam treatment, hydration hair mask, and deep follicular cleansing."
+  },
+  {
+    id: "beard-sculpting",
+    title: "Beard Sculpting & Trim",
+    category: "individual",
+    price: "₹250",
+    numericPrice: 250,
+    duration: "30 min",
+    description: "Detailed beard design, precision trimmer and straight razor lines, premium sandalwood oil massage."
+  }
+];
+
+// Barbers / Experts
+const barbers = [
+  {
+    id: "any",
+    name: "Any Available Expert",
+    role: "Fastest Booking Option",
+    bio: "Select this option to pair with is any top specialist available at your chosen time.",
+    image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=800"
+  },
+  {
+    id: "sahil",
+    name: "Sahil",
+    role: "Founder & Master Stylist",
+    bio: "With over 15 years of expert experience, Sahil specializes in high-end transformations, wigs hair patching, and bridal aesthetics.",
+    image: "https://images.unsplash.com/photo-1599305090598-fe179d501227?auto=format&fit=crop&q=80&w=800"
+  },
+  {
+    id: "vikram",
+    name: "Vikram",
+    role: "Texture & Treatment Specialist",
+    bio: "Expert in heavy texturing, premium perming, hair coloring formulas, and complex non-surgical replacements.",
+    image: "https://images.unsplash.com/photo-1621605815971-fbc38c665434?auto=format&fit=crop&q=80&w=800"
+  },
+  {
+    id: "arjun",
+    name: "Arjun",
+    role: "Senior Barber Architect",
+    bio: "Classic blade artisan, expert in hyper-detailed tapers, mid to low skin fades, and luxury beard sculpting contours.",
+    image: "https://images.unsplash.com/photo-1542382156909-9ae37b3f56fd?auto=format&fit=crop&q=80&w=800"
+  }
+];
+
+// Testimonials Data for Setmore tab
+const testimonials = [
+  {
+    name: "Rohan Verma",
+    role: "Local Guide",
+    text: "Sahil is a true magician with hair! I've been coming here for 2 years and every visit is a masterpiece. Best hair academy in Karnal for both grooming and learning.",
+    rating: 5,
+    date: "2 weeks ago"
+  },
+  {
+    name: "Megha Gupta",
+    role: "Regular Client",
+    text: "Amazing services! The staff is very professional and the hygiene standards are top-notch. Highly recommended for bridal makeup and hair styling.",
+    rating: 5,
+    date: "1 month ago"
+  },
+  {
+    name: "Amit Saini",
+    role: "Regular",
+    text: "The best place to learn and get styled in Karnal. Sahil's attention to detail is incomparable. The atmosphere is very welcoming and luxurious.",
+    rating: 5,
+    date: "3 weeks ago"
+  },
+  {
+    name: "Sonia Mehta",
+    role: "Bridal Client",
+    text: "Found this boutique salon through Google and I'm so glad I did. Excellent service and very polite staff. They made my special day even more beautiful.",
+    rating: 5,
+    date: "4 months ago"
+  }
+];
+
+// Gallery Images
+const galleryImages = [
+  {
+    url: "https://images.unsplash.com/photo-1595053826286-2e59efd9ff18?auto=format&fit=crop&q=80&w=800",
+    title: "Master Styling cut",
+    category: "Styling"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800",
+    title: "Bridal Royale Setup",
+    category: "Makeover"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=800",
+    title: "Hair follicular Healing",
+    category: "Health"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1527799822367-3d88bf0c4738?auto=format&fit=crop&q=80&w=800",
+    title: "Texture Hair Perming",
+    category: "Texture"
+  }
+];
+
+// Available hours data
+const businessHours = [
+  { day: "Monday", hours: "9:00 AM - 9:00 PM", status: "Open" },
+  { day: "Tuesday", hours: "9:00 AM - 9:00 PM", status: "Open" },
+  { day: "Wednesday", hours: "9:00 AM - 9:00 PM", status: "Open" },
+  { day: "Thursday", hours: "9:00 AM - 9:00 PM", status: "Open" },
+  { day: "Friday", hours: "9:00 AM - 9:00 PM", status: "Open" },
+  { day: "Saturday", hours: "9:00 AM - 9:00 PM", status: "Open" },
+  { day: "Sunday", hours: "9:00 AM - 9:00 PM", status: "Open" }
+];
+
+
+
+
+
+
+export default function BookingWidget({ activeTab: propActiveTab, setActiveTab: propSetActiveTab } = {}) {
+  // Tabs: 'book' | 'experts' | 'reviews' | 'gallery' | 'about'
+  const [internalActiveTab, setInternalActiveTab] = useState("book");
+  
+  const activeTab = propActiveTab !== undefined ? propActiveTab : internalActiveTab;
+  const setActiveTab = propSetActiveTab !== undefined ? propSetActiveTab : setInternalActiveTab;
+  
+  // Wizard Steps: 1 (Services) | 2 (Staff) | 3 (Time) | 4 (Details) | 5 (Success)
+  const [wizardStep, setWizardStep] = useState(1);
+  const [selectedServices, setSelectedServices] = useState([]);
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [selectedExpert, setSelectedExpert] = useState(null);
+  
+  // Date Picker State
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [currentMonth, setCurrentMonth] = useState(new Date());
+  
+  // Slots State
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
+  
+  // Contact details form
+  const [formName, setFormName] = useState("");
+  const [formPhone, setFormPhone] = useState("");
+  const [formEmail, setFormEmail] = useState("");
+  const [formNotes, setFormNotes] = useState("");
+  const [whatsappMessageUrl, setWhatsappMessageUrl] = useState("https://wa.me/919992310449");
+
+  // Helper arrays for timesslots
+  const timeSlots = [
+    "09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM",
+    "12:00 PM", "12:30 PM", "01:00 PM", "01:30 PM", "02:00 PM", "02:30 PM",
+    "03:00 PM", "03:30 PM", "04:00 PM", "04:30 PM", "05:00 PM", "05:30 PM",
+    "06:00 PM", "06:30 PM", "07:00 PM", "07:30 PM", "08:00 PM", "08:30 PM"
+  ];
+
+  // Helper for calendar days
+  const daysInMonth = (year, month) => new Date(year, month + 1, 0).getDate();
+  const firstDayOfMonth = (year, month) => new Date(year, month, 1).getDay();
+
+  const handleNextMonth = () => {
+    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1));
+  };
+
+  const handlePrevMonth = () => {
+    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1));
+  };
+
+  const selectServiceToggle = (service) => {
+    setSelectedServices(prev => {
+      const exists = prev.some(s => s.id === service.id);
+      if (exists) {
+        return prev.filter(s => s.id !== service.id);
+      } else {
+        return [...prev, service];
+      }
+    });
+  };
+
+  const calculateTotal = () => {
+    return selectedServices.reduce((sum, s) => sum + s.numericPrice, 0);
+  };
+
+  const handleBookNowTabDirect = (service) => {
+    setSelectedServices([service]);
+    setWizardStep(2);
+    setActiveTab("book");
+    window.scrollTo({ top: 320, behavior: "smooth" });
+  };
+
+  const handleBookNowExpertDirect = (barber) => {
+    setSelectedExpert(barber);
+    setWizardStep(1); // will start with services but barber is locked
+    setActiveTab("book");
+    window.scrollTo({ top: 320, behavior: "smooth" });
+  };
+
+  const handleSubmitBooking = (e) => {
+    e.preventDefault();
+    if (!selectedDate || !selectedTimeSlot) return;
+
+    // Advance to Success
+    setWizardStep(5);
+
+    const formattedDate = selectedDate.toLocaleDateString("en-US", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric"
+    });
+
+    const serviceTitles = selectedServices.map(s => s.title).join(", ");
+    const totalPrice = selectedServices.reduce((acc, s) => acc + s.numericPrice, 0);
+
+    // Prepare Whatsapp message
+    const waMessage = 
+      `*SAHIL HAIR EXPERT - APPOINTMENT REQUEST*\n\n` +
+      `📅 *Date:* ${formattedDate}\n` +
+      `⏰ *Time Slot:* ${selectedTimeSlot}\n` +
+      `💈 *Stylist:* ${selectedExpert ? selectedExpert.name : "Any Available"}\n` +
+      `✂️ *Services:* ${serviceTitles}\n` +
+      `💳 *Total Cost:* ₹${totalPrice}\n\n` +
+      `*Client Details:*\n` +
+      `• *Name:* ${formName}\n` +
+      `• *Phone:* ${formPhone}\n` +
+      `• *Email:* ${formEmail || "N/A"}\n` +
+      `• *Special Request:* ${formNotes || "None"}\n\n` +
+      `_Please confirm my booking slot. Thank you!_`;
+
+    const whatsappUrl = `https://wa.me/919992310449?text=${encodeURIComponent(waMessage)}`;
+    setWhatsappMessageUrl(whatsappUrl);
+    
+    // Open WhatsApp immediately without timeout to bypass browser popup blockers
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+  };
+
+  const downloadReceipt = () => {
+    const formattedDate = selectedDate ? selectedDate.toLocaleDateString("en-US", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric"
+    }) : "";
+
+    const serviceTitles = selectedServices.map(s => s.title).join(", ");
+    const totalPrice = selectedServices.reduce((acc, s) => acc + s.numericPrice, 0);
+
+    const receiptText = `
+========================================
+         SAHIL HAIR EXPERT
+       Appointment Receipt
+========================================
+Date: ${formattedDate}
+Time Slot: ${selectedTimeSlot}
+Stylist: ${selectedExpert ? selectedExpert.name : "Any Available"}
+----------------------------------------
+Services:
+${selectedServices.map(s => ` - ${s.title} (${s.price})`).join("\n")}
+----------------------------------------
+Total Cost: ₹${totalPrice}
+========================================
+Client Details:
+Name: ${formName}
+Phone: ${formPhone}
+Email: ${formEmail || "N/A"}
+Special Request: ${formNotes || "None"}
+========================================
+Thank you for booking with us!
+See you soon at Sahil Hair Expert.
+========================================
+    `.trim();
+
+    const element = document.createElement("a");
+    const file = new Blob([receiptText], { type: 'text/plain' });
+    element.href = URL.createObjectURL(file);
+    element.download = `Sahil_Hair_Expert_Receipt_${formName.replace(/\s+/g, '_') || 'Booking'}.txt`;
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  };
+
+  // Render Calendar Helper
+  const renderCalendarDays = () => {
+    const year = currentMonth.getFullYear();
+    const month = currentMonth.getMonth();
+    const totalDays = daysInMonth(year, month);
+    const firstDayIdx = firstDayOfMonth(year, month);
+    const dayCells = [];
+
+    // Empty spaces for padding
+    for (let i = 0; i < firstDayIdx; i++) {
+      dayCells.push(<div key={`pad-${i}`} className="w-full aspect-square text-transparent max-w-[40px] flex items-center justify-center" />);
+    }
+
+    // Days grid
+    const today = new Date();
+    for (let day = 1; day <= totalDays; day++) {
+      const dateToCheck = new Date(year, month, day);
+      // Disable past days
+      const isPast = new Date(year, month, day, 23, 59, 59) < today;
+      const isSelected = _optionalChain([selectedDate, 'optionalAccess', _2 => _2.toDateString, 'call', _3 => _3()]) === dateToCheck.toDateString();
+      const isToday = today.toDateString() === dateToCheck.toDateString();
+
+      dayCells.push(
+        <button
+          key={`day-${day}`}
+          type="button"
+          disabled={isPast}
+          onClick={() => setSelectedDate(dateToCheck)}
+          className={`w-full aspect-square text-xs font-semibold rounded-full flex items-center justify-center transition-all duration-300 max-w-[40px]
+            ${isPast 
+              ? "opacity-20 cursor-not-allowed text-luxury-text/40" 
+              : "cursor-pointer text-luxury-text hover:bg-luxury-gold hover:text-black"
+            }
+            ${isSelected ? "bg-luxury-gold text-black font-extrabold shadow-lg" : ""}
+            ${isToday && !isSelected ? "border border-luxury-gold/50 text-luxury-gold" : ""}
+          `}
+        >
+          {day}
+        </button>
+      );
+    }
+    return dayCells;
+  };
+
+  return (
+    <div className="w-full max-w-5xl mx-auto px-4 md:px-6">
+      
+      {/* Setmore Signature Business Card Header */}
+      <div className="bg-luxury-text/5 border border-luxury-text/10 rounded-2xl p-6 md:p-8 mb-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-5">
+          {/* Circular Salon Logo */}
+          <div className="relative">
+            <div className="w-20 h-20 flex-shrink-0 rounded-full border border-luxury-gold/30 bg-black flex items-center justify-center overflow-hidden">
+              {/* <Scissors className=" text-luxury-gold" /> */}
+              <img src={logo} alt="Sahil_hair_expert" className="w-22 h-22" />
+            </div>
+            <span className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-black rounded-full shadow-lg" />
+          </div>
+          
+          <div className="space-y-1.5">
+            <div className="flex flex-col sm:flex-row items-center gap-2">
+              <h1 className="text-2xl md:text-3xl font-serif text-white tracking-wide">Sahil Hair Expert</h1>
+              <span className="text-[9px] uppercase tracking-widest bg-luxury-gold/20 text-luxury-gold px-2.5 py-1 font-bold rounded">Karnal Studio</span>
+            </div>
+            
+            <p className="text-xs text-luxury-text/60 font-light flex items-center justify-center md:justify-start gap-1">
+              <MapPin className="w-3.5 h-3.5 text-luxury-gold flex-shrink-0" />
+              Dugra Colony Road, Sec 34, Karnal, Haryana 132001
+            </p>
+            
+            {/* Reviews indicator */}
+            <div className="flex items-center justify-center md:justify-start gap-2.5 text-xs">
+              <div className="flex text-luxury-gold">
+                {[...Array(5)].map((_, i) => <Star key={i} size={13} fill="currentColor" />)}
+              </div>
+              <span className="text-white font-medium">4.9</span>
+              <span className="text-luxury-text/40">(248 google reviews)</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Real-time Business details card */}
+        <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center w-full md:w-auto border-t md:border-t-0 md:border-l border-luxury-text/10 pt-4 md:pt-0 md:pl-8 gap-4 md:gap-1 text-center md:text-right">
+          <div className="text-left md:text-right">
+            <span className="text-[9px] uppercase tracking-widest text-luxury-gold block font-mono">Today Status</span>
+            <span className="text-xs font-semibold text-green-400">Open • Closes 9:00 PM</span>
+          </div>
+          <div className="text-right">
+            <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 block font-mono">timezone</span>
+            <span className="text-xs text-luxury-text/70">GMT+05:30 (India)</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Setmore Tabs Row */}
+      <div className="flex justify-between md:justify-start items-center border-b border-luxury-text/10 gap-2 overflow-x-auto pb-px no-scrollbar mb-8">
+        {[
+          { id: "book", label: "Book Appointment", icon: Sparkles },
+          { id: "experts", label: "Our Stylists", icon: Smile },
+          { id: "reviews", label: "Reviews", icon: Star },
+          { id: "gallery", label: "Gallery", icon: Scissors },
+          { id: "about", label: "Hours & Info", icon: Clock4 }
+        ].map((tab) => {
+          const IconComponent = tab.icon;
+          const isActive = activeTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => {
+                setActiveTab(tab.id );
+                // reset booking wizard state safely unless successful
+                if (tab.id === "book" && wizardStep === 5) {
+                  setWizardStep(1);
+                  setSelectedServices([]);
+                  setSelectedExpert(null);
+                  setSelectedDate(null);
+                  setSelectedTimeSlot("");
+                }
+              }}
+              className={`flex items-center gap-1.5 py-4 px-4 text-xs uppercase tracking-widest font-semibold transition-all duration-300 relative select-none cursor-pointer whitespace-nowrap
+                ${isActive 
+                  ? "text-luxury-gold font-bold" 
+                  : "text-luxury-text/50 hover:text-luxury-text"}`}
+            >
+              <IconComponent size={14} className={isActive ? "text-luxury-gold" : "text-luxury-text/40"} />
+              {tab.label}
+              {isActive && (
+                <motion.div 
+                  layoutId="activeTabUnderline" 
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-luxury-gold" 
+                />
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Primary Tab View Panel */}
+      <div className="min-h-[450px]">
+        <AnimatePresence mode="wait">
+          
+          {/* TAB 1: BOOKING WIZARD */}
+          {activeTab === "book" && (
+            <motion.div
+              key="tab-book"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+              className="bg-black/30 border border-luxury-text/10 rounded-2xl p-6 md:p-8"
+            >
+              {/* Stepper Wizard Progress Indicators */}
+              {wizardStep < 5 && (
+                <div className="flex justify-between items-center mb-8 pb-6 border-b border-luxury-text/10 overflow-x-auto no-scrollbar scroll-smooth">
+                  {[
+                    { step: 1, label: "Services" },
+                    { step: 2, label: "Specialist" },
+                    { step: 3, label: "Time Slot" },
+                    { step: 4, label: "Your Info" }
+                  ].map((s) => (
+                    <div key={s.step} className="flex items-center gap-2 whitespace-nowrap px-2">
+                      <div className={`w-6 h-6 rounded-full text-[10px] font-bold flex items-center justify-center transition-all duration-300
+                        ${wizardStep === s.step 
+                          ? "bg-luxury-gold text-black" 
+                          : wizardStep > s.step 
+                            ? "bg-green-500 text-white" 
+                            : "bg-luxury-text/10 text-luxury-text/50"}`}
+                      >
+                        {wizardStep > s.step ? <Check size={12} strokeWidth={3} /> : s.step}
+                      </div>
+                      <span className={`text-[10px] uppercase tracking-widest font-bold font-mono transition-colors duration-300
+                        ${wizardStep === s.step ? "text-white" : "text-luxury-text/40"}`}
+                      >
+                        {s.label}
+                      </span>
+                      {s.step < 4 && <ChevronRight size={12} className="text-luxury-text/20 mx-1 hidden sm:block" />}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* STEP 1: SELECT SERVICES */}
+              {wizardStep === 1 && (
+                <div className="space-y-6">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                      <h2 className="text-xl font-serif text-white uppercase tracking-wide">1. Select Luxury Services</h2>
+                      <p className="text-xs text-luxury-text/50">Choose one or multiple services to bundle into your customized slots.</p>
+                    </div>
+                    {/* Selected tally */}
+                    <div className="bg-luxury-gold/10 border border-luxury-gold/20 text-luxury-gold px-3 py-1.5 rounded-lg text-xs font-mono">
+                      Selected: <span className="font-bold">{selectedServices.length}</span>
+                    </div>
+                  </div>
+
+                  {/* Category Selection Filter pills */}
+                  <div className="flex gap-2 pb-2 overflow-x-auto no-scrollbar">
+                    {serviceCategories.map((cat) => (
+                      <button
+                        key={cat.id}
+                        onClick={() => setCategoryFilter(cat.id)}
+                        className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 whitespace-nowrap cursor-pointer
+                          ${categoryFilter === cat.id 
+                            ? "bg-luxury-gold text-black font-bold shadow-md shadow-luxury-gold/5" 
+                            : "bg-luxury-text/5 hover:bg-luxury-text/10 text-luxury-text/60 border border-luxury-text/10"}`}
+                      >
+                        {cat.name}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Services Menu Cards Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {services
+                      .filter(s => categoryFilter === "all" || s.category === categoryFilter)
+                      .map((service) => {
+                        const isSelected = selectedServices.some(item => item.id === service.id);
+                        return (
+                          <div
+                            key={service.id}
+                            onClick={() => selectServiceToggle(service)}
+                            className={`p-5 rounded-xl border transition-all duration-500 flex flex-col justify-between cursor-pointer group hover:scale-[1.01]
+                              ${isSelected 
+                                ? "bg-luxury-gold/5 border-luxury-gold shadow-lg shadow-luxury-gold/5" 
+                                : "bg-luxury-text/5 border-luxury-text/10 hover:border-luxury-gold/40"}`}
+                          >
+                            <div className="space-y-1.5">
+                              <div className="flex justify-between items-start gap-2">
+                                <h3 className="text-sm font-semibold tracking-wide text-white group-hover:text-luxury-gold transition-colors duration-300">
+                                  {service.title}
+                                </h3>
+                                <span className="text-sm font-bold text-luxury-gold font-mono whitespace-nowrap">
+                                  {service.price}
+                                </span>
+                              </div>
+                              <p className="text-xs text-luxury-text/65 font-light leading-relaxed line-clamp-2">
+                                {service.description}
+                              </p>
+                            </div>
+
+                            <div className="flex items-center justify-between pt-4 mt-4 border-t border-luxury-text/10 text-[10px] uppercase font-mono tracking-wider">
+                              <span className="flex items-center gap-1 text-luxury-text/40">
+                                <Clock size={12} className="text-luxury-gold/60" />
+                                {service.duration}
+                              </span>
+
+                              <span className={`flex items-center gap-1 font-bold tracking-widest
+                                ${isSelected ? "text-luxury-gold" : "text-luxury-text/50"}`}
+                              >
+                                {isSelected ? (
+                                  <>
+                                    <Check size={12} className="text-luxury-gold animate-bounce" />
+                                    Selected
+                                  </>
+                                ) : (
+                                  "+ ADD SERVICE"
+                                )}
+                              </span>
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </div>
+
+                  {/* Step 1 Control Bar */}
+                  <div className="pt-6 border-t border-luxury-text/10 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div className="text-center sm:text-left">
+                      <span className="text-xs opacity-50 block font-mono">ESTIMATED TOTAL</span>
+                      <span className="text-xl font-bold font-serif text-luxury-gold">₹{calculateTotal()}</span>
+                      <span className="text-[10px] text-luxury-text/40 uppercase tracking-widest block font-mono">
+                        {selectedServices.length} Service(s) selected
+                      </span>
+                    </div>
+
+                    <button
+                      type="button"
+                      disabled={selectedServices.length === 0}
+                      onClick={() => setWizardStep(2)}
+                      className={`px-8 py-3.5 text-xs font-bold uppercase tracking-widest rounded-lg flex items-center gap-2 select-none justify-center w-full sm:w-auto transition-all duration-300
+                        ${selectedServices.length > 0
+                          ? "bg-luxury-gold text-black shadow-lg shadow-luxury-gold/10 hover:scale-105 active:scale-95 cursor-pointer"
+                          : "bg-luxury-text/10 text-luxury-text/40 cursor-not-allowed"}`}
+                    >
+                      Choose Specialist
+                      <ChevronRight size={14} strokeWidth={2.5} />
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* STEP 2: CHOOSE STYLIST */}
+              {wizardStep === 2 && (
+                <div className="space-y-6">
+                  <div>
+                    <button 
+                      onClick={() => setWizardStep(1)}
+                      className="flex items-center gap-1.5 text-xs text-luxury-gold uppercase tracking-widest font-semibold hover:underline mb-3 cursor-pointer"
+                    >
+                      <ArrowLeft size={13} /> Back to Services
+                    </button>
+                    <h2 className="text-xl font-serif text-white uppercase tracking-wide">2. Choose Your Expert</h2>
+                    <p className="text-xs text-luxury-text/50 font-light">Select a master styling coach or opt for any available to reduce schedule queues.</p>
+                  </div>
+
+                  {/* Stylists Selector Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    {barbers.map((barber) => {
+                      const isSelected = _optionalChain([selectedExpert, 'optionalAccess', _4 => _4.id]) === barber.id;
+                      return (
+                        <div
+                          key={barber.id}
+                          onClick={() => setSelectedExpert(barber)}
+                          className={`p-4 rounded-xl border transition-all duration-500 cursor-pointer text-center flex flex-col items-center justify-between group
+                            ${isSelected 
+                              ? "bg-luxury-gold/5 border-luxury-gold shadow-lg shadow-luxury-gold/5" 
+                              : "bg-luxury-text/5 border-luxury-text/10 hover:border-luxury-gold/40"}`}
+                        >
+                          <div className={`w-20 h-20 rounded-full overflow-hidden border-2 mb-4 group-hover:scale-105 transition-transform duration-500
+                            ${isSelected ? "border-luxury-gold" : "border-luxury-text/10"}`}
+                          >
+                            <img 
+                              src={barber.image} 
+                              alt={barber.name} 
+                              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" 
+                            />
+                          </div>
+
+                          <div className="space-y-1">
+                            <h3 className="text-sm font-semibold text-white group-hover:text-luxury-gold transition-colors block">
+                              {barber.name}
+                            </h3>
+                            <span className="text-[9px] uppercase tracking-wider text-luxury-gold bg-luxury-gold/10 px-2 py-0.5 rounded font-bold font-mono">
+                              {barber.role}
+                            </span>
+                            <p className="text-[11px] text-luxury-text/50 font-light leading-relaxed line-clamp-3 pt-2">
+                              {barber.bio}
+                            </p>
+                          </div>
+
+                          <button
+                            type="button"
+                            className={`mt-4 w-full py-2 rounded text-[10px] font-bold uppercase tracking-wider border transition-all duration-300
+                              ${isSelected 
+                                ? "bg-luxury-gold text-black border-luxury-gold" 
+                                : "border-luxury-text/10 text-luxury-text/50 hover:bg-luxury-text/5"}`}
+                          >
+                            {isSelected ? "Selected" : "Select"}
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Step 2 Controls */}
+                  <div className="pt-6 border-t border-luxury-text/10 flex justify-between items-center">
+                    <button
+                      type="button"
+                      onClick={() => setWizardStep(1)}
+                      className="px-6 py-3 border border-luxury-text/10 rounded-lg text-xs text-luxury-text/50 uppercase tracking-widest font-semibold hover:bg-luxury-text/5 hover:text-white transition-colors cursor-pointer"
+                    >
+                      Back
+                    </button>
+
+                    <button
+                      type="button"
+                      disabled={!selectedExpert}
+                      onClick={() => setWizardStep(3)}
+                      className={`px-8 py-3.5 text-xs font-bold uppercase tracking-widest rounded-lg flex items-center gap-2 select-none transition-all duration-300
+                        ${selectedExpert
+                          ? "bg-luxury-gold text-black shadow-lg shadow-luxury-gold/10 hover:scale-105 active:scale-95 cursor-pointer"
+                          : "bg-luxury-text/10 text-luxury-text/40 cursor-not-allowed"}`}
+                    >
+                      Select Date & Time
+                      <ChevronRight size={14} strokeWidth={2.5} />
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* STEP 3: PREFERRED DATE & TIME */}
+              {wizardStep === 3 && (
+                <div className="space-y-6">
+                  <div>
+                    <button 
+                      onClick={() => setWizardStep(2)}
+                      className="flex items-center gap-1.5 text-xs text-luxury-gold uppercase tracking-widest font-semibold hover:underline mb-3 cursor-pointer"
+                    >
+                      <ArrowLeft size={13} /> Back to Expert
+                    </button>
+                    <h2 className="text-xl font-serif text-white uppercase tracking-wide">3. Selected Slot Period</h2>
+                    <p className="text-xs text-luxury-text/50 font-light">Choose a date first on the calendar, then pick your desired appointment time block.</p>
+                  </div>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    {/* Left Column: Calendar (Solid UI) */}
+                    <div className="lg:col-span-7 bg-luxury-text/5 border border-luxury-text/10 p-5 rounded-2xl">
+                      <div className="flex items-center justify-between mb-4 pb-2 border-b border-luxury-text/10">
+                        <button 
+                          type="button" 
+                          onClick={handlePrevMonth} 
+                          className="p-1.5 font-bold hover:text-luxury-gold transition-colors cursor-pointer"
+                        >
+                          <ChevronLeft size={16} />
+                        </button>
+                        <span className="text-xs uppercase tracking-widest font-mono font-bold text-white">
+                          {currentMonth.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+                        </span>
+                        <button 
+                          type="button" 
+                          onClick={handleNextMonth} 
+                          className="p-1.5 font-bold hover:text-luxury-gold transition-colors cursor-pointer"
+                        >
+                          <ChevronRight size={16} />
+                        </button>
+                      </div>
+
+                      {/* Calendar Weekday headers */}
+                      <div className="grid grid-cols-7 gap-1 text-center font-bold mb-3 justify-items-center">
+                        {["S", "M", "T", "W", "T", "F", "S"].map((d, idx) => (
+                          <span key={`${d}-${idx}`} className="w-full text-[10px] text-luxury-gold font-mono block text-center max-w-[40px]">{d}</span>
+                        ))}
+                      </div>
+
+                      {/* Calendar days grid */}
+                      <div className="grid grid-cols-7 gap-1.5 justify-items-center">
+                        {renderCalendarDays()}
+                      </div>
+                    </div>
+
+                    {/* Right Column: Time Slots */}
+                    <div className="lg:col-span-5 flex flex-col">
+                      <div className="bg-luxury-text/5 border border-luxury-text/10 p-5 rounded-2xl flex-1 flex flex-col">
+                        <div className="mb-4 pb-2 border-b border-luxury-text/10 text-center lg:text-left">
+                          <span className="text-[9px] uppercase tracking-widest text-luxury-gold font-mono block">Chosen date</span>
+                          <span className="text-sm font-semibold text-white">
+                            {selectedDate 
+                              ? selectedDate.toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" })
+                              : "No date selected"}
+                          </span>
+                        </div>
+
+                        {!selectedDate ? (
+                          <div className="flex-1 flex flex-col items-center justify-center text-center p-6 text-luxury-text/30">
+                            <CalendarIcon size={32} strokeWidth={1} className="mb-2 text-luxury-gold/50" />
+                            <p className="text-xs font-light">Please select your preferred date on the calendar first.</p>
+                          </div>
+                        ) : (
+                          <div className="flex-1 space-y-3">
+                            <span className="text-[10px] uppercase tracking-widest text-luxury-text/45 font-mono block mb-2 font-bold">Pick your time slot:</span>
+                            <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-2 gap-2 max-h-[220px] overflow-y-auto pr-1 text-xs no-scrollbar">
+                              {timeSlots.map((time) => {
+                                const isSelected = selectedTimeSlot === time;
+                                return (
+                                  <button
+                                    key={time}
+                                    type="button"
+                                    onClick={() => setSelectedTimeSlot(time)}
+                                    className={`py-2 px-3 rounded text-center border font-mono tracking-tighter transition-all duration-300 text-[10px] font-bold cursor-pointer
+                                      ${isSelected 
+                                        ? "bg-luxury-gold border-luxury-gold text-black shadow-md font-extrabold" 
+                                        : "bg-luxury-text/5 border-luxury-text/10 text-luxury-text/70 hover:border-luxury-gold/60"}`}
+                                  >
+                                    {time}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 3 Controls */}
+                  <div className="pt-6 border-t border-luxury-text/10 flex justify-between items-center">
+                    <button
+                      type="button"
+                      onClick={() => setWizardStep(2)}
+                      className="px-6 py-3 border border-luxury-text/10 rounded-lg text-xs text-luxury-text/50 uppercase tracking-widest font-semibold hover:bg-luxury-text/5 hover:text-white transition-colors cursor-pointer"
+                    >
+                      Back
+                    </button>
+
+                    <button
+                      type="button"
+                      disabled={!selectedDate || !selectedTimeSlot}
+                      onClick={() => setWizardStep(4)}
+                      className={`px-8 py-3.5 text-xs font-bold uppercase tracking-widest rounded-lg flex items-center gap-2 select-none transition-all duration-300
+                        ${selectedDate && selectedTimeSlot
+                          ? "bg-luxury-gold text-black shadow-lg shadow-luxury-gold/10 hover:scale-105 active:scale-95 cursor-pointer"
+                          : "bg-luxury-text/10 text-luxury-text/40 cursor-not-allowed"}`}
+                    >
+                      Fill Contact Info
+                      <ChevronRight size={14} strokeWidth={2.5} />
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* STEP 4: CONTACT INFORMATION FORM */}
+              {wizardStep === 4 && (
+                <div className="space-y-6">
+                  <div>
+                    <button 
+                      onClick={() => setWizardStep(3)}
+                      className="flex items-center gap-1.5 text-xs text-luxury-gold uppercase tracking-widest font-semibold hover:underline mb-3 cursor-pointer"
+                    >
+                      <ArrowLeft size={13} /> Back to Date & Time
+                    </button>
+                    <h2 className="text-xl font-serif text-white uppercase tracking-wide">4. Personal Guidelines</h2>
+                    <p className="text-xs text-luxury-text/50 font-light">Provide your contact info details so we can synchronize your scheduler blocks.</p>
+                  </div>
+
+                  <form onSubmit={handleSubmitBooking} className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    {/* Form Input fields */}
+                    <div className="lg:col-span-7 space-y-4">
+                      <div className="space-y-2">
+                        <label className="text-[9px] uppercase tracking-widest font-bold opacity-60 font-mono">Full Name *</label>
+                        <input
+                          type="text"
+                          required
+                          value={formName}
+                          onChange={(e) => setFormName(e.target.value)}
+                          placeholder="Your Name (e.g. Nitish Kamboj)"
+                          className="w-full bg-transparent border border-luxury-text/10 rounded-xl px-4 py-3 text-sm focus:border-luxury-gold focus:outline-none transition-all duration-300 text-white placeholder-luxury-text/20"
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <label className="text-[9px] uppercase tracking-widest font-bold opacity-60 font-mono">Phone Number *</label>
+                          <input
+                            type="tel"
+                            required
+                            value={formPhone}
+                            onChange={(e) => setFormPhone(e.target.value)}
+                            placeholder="Your contact (e.g. +91 98765-43210)"
+                            className="w-full bg-transparent border border-luxury-text/10 rounded-xl px-4 py-3 text-sm focus:border-luxury-gold focus:outline-none transition-all duration-300 text-white placeholder-luxury-text/20 font-mono"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <label className="text-[9px] uppercase tracking-widest font-bold opacity-60 font-mono">Email Address</label>
+                          <input
+                            type="email"
+                            value={formEmail}
+                            onChange={(e) => setFormEmail(e.target.value)}
+                            placeholder="name@example.com (Optional)"
+                            className="w-full bg-transparent border border-luxury-text/10 rounded-xl px-4 py-3 text-sm focus:border-luxury-gold focus:outline-none transition-all duration-300 text-white placeholder-luxury-text/20 font-mono"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-[9px] uppercase tracking-widest font-bold opacity-60 font-mono">Special Directives</label>
+                        <textarea
+                          rows={3}
+                          value={formNotes}
+                          onChange={(e) => setFormNotes(e.target.value)}
+                          placeholder="E.g. Hair restoration preferences, perming style requirements, or specific timings details..."
+                          className="w-full bg-transparent border border-luxury-text/10 rounded-xl px-4 py-3 text-sm focus:border-luxury-gold focus:outline-none transition-all duration-300 text-white placeholder-luxury-text/20 resize-none font-light leading-relaxed"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Summary confirmation ticket */}
+                    <div className="lg:col-span-5">
+                      <div className="bg-luxury-text/5 border border-luxury-gold/25 rounded-2xl p-5 space-y-4 relative overflow-hidden backdrop-blur-md">
+                        <div className="absolute top-0 right-0 w-24 h-24 bg-luxury-gold/5 rounded-full blur-2xl" />
+                        
+                        <h3 className="text-sm font-bold uppercase tracking-widest text-luxury-gold border-b border-luxury-text/10 pb-2.5 font-mono">
+                          Review Request Detail
+                        </h3>
+
+                        <div className="space-y-3.5 text-xs">
+                          <div className="space-y-1">
+                            <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 font-mono block">service(s)</span>
+                            <ul className="text-white font-medium list-disc list-inside space-y-1 pl-1">
+                              {selectedServices.map(s => (
+                                <li key={s.id} className="truncate">
+                                  {s.title}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 font-mono block">stylist expert</span>
+                              <span className="text-white font-semibold flex items-center gap-1">
+                                {selectedExpert ? selectedExpert.name : "Any Available"}
+                              </span>
+                            </div>
+                            <div>
+                              <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 font-mono block font-bold leading-normal">duration tally</span>
+                              <span className="text-white font-semibold font-mono flex items-center gap-1.5">
+                                <Clock size={12} className="text-luxury-gold/80" />
+                                {selectedServices.reduce((sum, s) => {
+                                  const mins = parseInt(s.duration);
+                                  return sum + (isNaN(mins) ? 0 : mins);
+                                }, 0)} Mins
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 font-mono block">preferred date</span>
+                              <span className="text-white font-mono font-semibold">
+                                {_optionalChain([selectedDate, 'optionalAccess', _5 => _5.toLocaleDateString, 'call', _6 => _6("en-US", { month: "short", day: "numeric", year: "2-digit" })])}
+                              </span>
+                            </div>
+                            <div>
+                              <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 font-mono block font-mono">time slot</span>
+                              <span className="text-white font-mono font-semibold">
+                                {selectedTimeSlot}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="pt-3 border-t border-luxury-text/10 flex justify-between items-center bg-black/20 -mx-5 -mb-5 px-5 py-4">
+                            <span className="text-xs font-bold text-white uppercase tracking-widest">Estimated fee:</span>
+                            <span className="text-lg font-bold font-serif text-luxury-gold font-mono">₹{calculateTotal()}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Step 4 Buttons - Form Submission */}
+                    <div className="lg:col-span-12 pt-4 border-t border-luxury-text/10 flex flex-col sm:flex-row justify-between items-center gap-4">
+                      <button
+                        type="button"
+                        onClick={() => setWizardStep(3)}
+                        className="px-6 py-3 border border-luxury-text/10 rounded-lg text-xs text-luxury-text/50 uppercase tracking-widest font-semibold hover:bg-luxury-text/5 hover:text-white transition-colors cursor-pointer w-full sm:w-auto"
+                      >
+                        Back
+                      </button>
+
+                      <button
+                        type="submit"
+                        className="px-10 py-4 bg-luxury-gold text-black text-xs font-bold uppercase tracking-[0.2em] rounded-lg shadow-lg shadow-luxury-gold/15 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-1.5 w-full sm:w-auto cursor-pointer"
+                      >
+                        Instant Booking Request
+                        <ExternalLink size={14} />
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              )}
+
+              {/* STEP 5: SUCCESS state */}
+              {wizardStep === 5 && (
+                <div className="text-center py-10 px-4 space-y-6 max-w-lg mx-auto">
+                  <div className="w-16 h-16 bg-green-500/10 border border-green-500/30 text-green-500 rounded-full flex items-center justify-center mx-auto shadow-xl shadow-green-500/5">
+                    <Check size={32} strokeWidth={3} className="animate-pulse" />
+                  </div>
+
+                  <div className="space-y-2">
+                    <h2 className="text-2xl md:text-3xl font-serif text-white uppercase tracking-wide">Reservation Sent!</h2>
+                    <p className="text-xs text-luxury-text/65 leading-relaxed font-light">
+                      We have compiled your selection details into a custom appointment receipt on WhatsApp to secure confirmation.
+                    </p>
+                  </div>
+
+                  {/* Summary ticket copy */}
+                  <div className="bg-luxury-text/5 border border-luxury-text/10 rounded-xl p-5 text-left text-xs space-y-2.5">
+                    <div className="flex justify-between border-b border-luxury-text/10 pb-2">
+                      <span className="text-luxury-text/40 uppercase tracking-widest">Service items:</span>
+                      <span className="font-semibold text-white truncate max-w-[200px]">
+                        {selectedServices.map(s => s.title).join(", ")}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-luxury-text/40 uppercase tracking-widest">Stylist Coach:</span>
+                      <span className="font-semibold text-white">
+                        {selectedExpert ? selectedExpert.name : "Any Available"}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-luxury-text/40 uppercase tracking-widest font-mono">Selected Timing:</span>
+                      <span className="font-semibold text-luxury-gold font-mono">
+                        {_optionalChain([selectedDate, 'optionalAccess', _7 => _7.toLocaleDateString, 'call', _8 => _8("en-US", { month: "short", day: "numeric" })])} @ {selectedTimeSlot}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between border-t border-luxury-text/10 pt-2 text-sm font-semibold">
+                      <span className="text-white uppercase tracking-widest font-bold">Estimated Cost:</span>
+                      <span className="text-luxury-gold font-mono font-bold">₹{calculateTotal()}</span>
+                    </div>
+                  </div>
+
+                  <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        // Reset everything
+                        setWizardStep(1);
+                        setSelectedServices([]);
+                        setSelectedExpert(null);
+                        setSelectedDate(null);
+                        setSelectedTimeSlot("");
+                        setFormName("");
+                        setFormPhone("");
+                        setFormNotes("");
+                        setActiveTab("book");
+                      }}
+                      className="px-6 py-3 border border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-black rounded-lg text-xs font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer"
+                    >
+                      Book Another Visit
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={downloadReceipt}
+                      className="px-6 py-3 bg-luxury-gold text-black hover:bg-white hover:text-black rounded-lg text-xs font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5"
+                    >
+                      <Download size={14} />
+                      Download Receipt
+                    </button>
+
+                    <a
+                      href={whatsappMessageUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg text-xs font-bold uppercase tracking-widest shadow-lg shadow-green-500/10 flex items-center justify-center gap-1.5"
+                    >
+                      Chat on WhatsApp
+                    </a>
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          )}
+
+          {/* TAB 2: OUR STYLISTS EXPERTS LIST */}
+          {activeTab === "experts" && (
+            <motion.div
+              key="tab-experts"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+              className="bg-black/30 border border-luxury-text/10 rounded-2xl p-6 md:p-8"
+            >
+              <div className="mb-8">
+                <h2 className="text-xl font-serif text-white uppercase tracking-wide">Meet the Artisans</h2>
+                <p className="text-xs text-luxury-text/50">Our elite styling team pairs traditional, heritage razor skills with contemporary hair perming & restoration aesthetics.</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {barbers
+                  .filter(b => b.id !== "any") // hide the mock 'any' option in informational list
+                  .map((stylist) => (
+                    <div 
+                      key={stylist.id} 
+                      className="bg-luxury-text/5 border border-luxury-text/10 rounded-xl overflow-hidden flex flex-col justify-between group hover:border-luxury-gold/40 transition-all duration-500"
+                    >
+                      <div className="aspect-[3/4] relative overflow-hidden bg-black/60">
+                        <img 
+                          src={stylist.image} 
+                          alt={stylist.name} 
+                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-[1200ms] ease-in-out group-hover:scale-105" 
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                      </div>
+
+                      <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                        <div className="space-y-1.5">
+                          <div className="flex justify-between items-start">
+                            <h3 className="text-lg font-serif text-white tracking-wide group-hover:text-luxury-gold transition-colors duration-300">
+                              {stylist.name}
+                            </h3>
+                            <span className="text-[8px] uppercase tracking-widest font-mono font-bold bg-luxury-gold/10 text-luxury-gold px-2 py-0.5 rounded border border-luxury-gold/20">
+                              Top Rated
+                            </span>
+                          </div>
+                          
+                          <span className="text-[9px] uppercase tracking-widest font-bold text-luxury-gold font-mono block">
+                            {stylist.role}
+                          </span>
+                          
+                          <p className="text-xs text-luxury-text/65 font-light leading-relaxed pt-1.5">
+                            {stylist.bio}
+                          </p>
+                        </div>
+
+                        {/* Booking shortcut CTA */}
+                        <div className="pt-4 border-t border-luxury-text/10">
+                          <button
+                            type="button"
+                            onClick={() => handleBookNowExpertDirect(stylist)}
+                            className="w-full bg-luxury-text/5 hover:bg-luxury-gold text-luxury-text/40 hover:text-black hover:border-luxury-gold py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-widest border border-luxury-text/10 transition-all duration-500 flex items-center justify-center gap-1.5 cursor-pointer"
+                          >
+                            <CalendarIcon size={12} />
+                            Schedule with {stylist.name}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </motion.div>
+          )}
+
+          {/* TAB 3: CLIENT GOOGLE REVIEWS */}
+          {activeTab === "reviews" && (
+            <motion.div
+              key="tab-reviews"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+              className="bg-black/30 border border-luxury-text/10 rounded-2xl p-6 md:p-8"
+            >
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8 pb-6 border-b border-luxury-text/10">
+                <div>
+                  <h2 className="text-xl font-serif text-white uppercase tracking-wide">Client Experience Reviews</h2>
+                  <p className="text-xs text-luxury-text/50 font-light">Honest, unedited comments syndicating customer satisfaction.</p>
+                </div>
+
+                <div className="flex items-center gap-4 bg-luxury-text/5 border border-luxury-text/10 p-4 rounded-xl">
+                  <div className="text-center px-2">
+                    <span className="text-3xl font-serif font-bold text-white block">4.9</span>
+                    <span className="text-[8px] uppercase tracking-widest text-luxury-text/40 font-mono">average score</span>
+                  </div>
+                  <div className="h-10 w-px bg-luxury-text/10" />
+                  <div className="space-y-1">
+                    <div className="flex text-luxury-gold">
+                      {[...Array(5)].map((_, i) => <Star key={i} size={13} fill="currentColor" />)}
+                    </div>
+                    <span className="text-[9px] uppercase tracking-widest text-luxury-text/45 font-mono block">verified Google Reviews</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Reviews Cards List */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {testimonials.map((review, idx) => (
+                  <div 
+                    key={idx} 
+                    className="p-6 bg-luxury-text/5 border border-luxury-text/10 rounded-xl flex flex-col justify-between space-y-4 hover:border-luxury-gold/30 transition-colors duration-500"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex justify-between items-center text-xs">
+                        <div className="flex text-luxury-gold">
+                          {[...Array(review.rating)].map((_, i) => (
+                            <Star key={i} size={10} fill="currentColor" className="mr-0.5" />
+                          ))}
+                        </div>
+                        <span className="text-[10px] text-luxury-text/30 font-mono">{review.date}</span>
+                      </div>
+
+                      <p className="text-xs text-luxury-text/75 italic font-light leading-relaxed">
+                        "{review.text}"
+                      </p>
+                    </div>
+
+                    <div className="flex justify-between items-end pt-3 border-t border-luxury-text/5 text-xs">
+                      <div>
+                        <h4 className="font-serif font-bold text-white text-sm">{review.name}</h4>
+                        <span className="text-[9px] uppercase tracking-widest text-luxury-gold font-bold font-mono">{review.role}</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-1 text-[8px] uppercase tracking-widest font-mono text-green-400 font-bold bg-green-500/10 px-2 py-0.5 rounded">
+                        <Check size={8} strokeWidth={4} /> Verified Client
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {/* TAB 4: STYLING GALLERY BENTO */}
+          {activeTab === "gallery" && (
+            <motion.div
+              key="tab-gallery"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+              className="bg-black/30 border border-luxury-text/10 rounded-2xl p-6 md:p-8"
+            >
+              <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                  <h2 className="text-xl font-serif text-white uppercase tracking-wide">Client Artistry Showcase</h2>
+                  <p className="text-xs text-luxury-text/50">Raw visual captures exhibiting master styling, perming folds, and airbrush bridal settings.</p>
+                </div>
+                <span className="text-[9px] uppercase tracking-widest font-mono text-luxury-gold bg-luxury-gold/10 px-2.5 py-1 font-bold rounded">
+                  4 High Res Captures
+                </span>
+              </div>
+
+              {/* Bento styled gallery images */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {galleryImages.map((image, i) => (
+                  <div 
+                    key={i} 
+                    className="group relative aspect-[3/4] rounded-xl overflow-hidden border border-luxury-text/10 bg-black"
+                  >
+                    <img 
+                      src={image.url} 
+                      alt={image.title} 
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-[1200ms] group-hover:scale-105" 
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5" />
+                    
+                    {/* Tiny watermark */}
+                    <div className="absolute bottom-4 left-4 right-4 z-10 flex flex-col bg-black/60 backdrop-blur-md border border-white/5 p-3 rounded opacity-0 group-hover:opacity-100 transition-all duration-500">
+                      <span className="text-[8px] uppercase tracking-wider text-luxury-gold font-bold font-mono">
+                        {image.category}
+                      </span>
+                      <span className="text-xs font-serif text-white font-semibold">
+                        {image.title}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {/* TAB 5: HOURS & BUSINESS INFO */}
+          {activeTab === "about" && (
+            <motion.div
+              key="tab-about"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+              className="bg-black/30 border border-luxury-text/10 rounded-2xl p-6 md:p-8 space-y-8"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+                
+                {/* Left Column: Studio description and active hours */}
+                <div className="md:col-span-7 space-y-6">
+                  <div className="space-y-3">
+                    <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-luxury-gold block font-mono">the heritage brand</span>
+                    <h2 className="text-xl font-serif text-white uppercase tracking-wide">Sahil Hair Expert, Karnal</h2>
+                    <p className="text-xs text-luxury-text/75 font-light leading-relaxed">
+                      Founded by master cosmetic artist Sahil, our Karnal workstation represents Haryana's elite salon space, delivering luxury styling, natural hair replacements (wigs and premium patches), specialized scalp medicine, and airbrush transformations.
+                    </p>
+                    <p className="text-xs text-luxury-text/75 font-light leading-relaxed">
+                      We operate on transparent appointment cycles inspired by the direct luxury of modern booking scheduling hubs like Setmore. Your time is valuable; we honor our commitments precisely.
+                    </p>
+                  </div>
+
+                  {/* Operational Contacts */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-luxury-text/10">
+                    <a 
+                      href="tel:+919992310449" 
+                      className="p-4 bg-luxury-text/5 border border-luxury-text/10 hover:border-luxury-gold/50 rounded-xl block group transition-colors duration-300"
+                    >
+                      <Phone className="w-5 h-5 text-luxury-gold mb-2 group-hover:bounce" />
+                      <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 block font-mono">Phone Support</span>
+                      <span className="text-xs font-semibold text-white font-mono">+91 99923 10449</span>
+                    </a>
+
+                    <div className="p-4 bg-luxury-text/5 border border-luxury-text/10 rounded-xl">
+                      <Clock className="w-5 h-5 text-luxury-gold mb-2" />
+                      <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 block font-mono">Walk-Ins policy</span>
+                      <span className="text-xs font-semibold text-white">Appts Priority</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Column: Operating schedule listing */}
+                <div className="md:col-span-5 bg-luxury-text/5 border border-luxury-text/10 p-5 rounded-2xl relative">
+                  <h3 className="text-xs uppercase tracking-widest text-luxury-gold font-bold mb-4 pb-2.5 border-b border-luxury-text/10 font-mono">
+                    Weekly Calendar Hours
+                  </h3>
+
+                  <div className="space-y-3 text-xs">
+                    {businessHours.map((row) => (
+                      <div key={row.day} className="flex justify-between items-center text-luxury-text/80">
+                        <span className="font-medium text-white">{row.day}</span>
+                        <div className="flex items-center gap-3">
+                          <span className="font-mono text-[11px] text-luxury-text/60">{row.hours}</span>
+                          <span className="text-[9px] uppercase px-1.5 py-0.5 rounded bg-green-500/10 text-green-400 font-bold font-mono">
+                            {row.status}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Embedded Location Map with Dark Mode Custom Filter */}
+                <div className="md:col-span-12 space-y-3">
+                  <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-luxury-gold block font-mono">Location Map</span>
+                  <div className="w-full h-64 md:h-80 rounded-xl overflow-hidden border border-luxury-text/10 bg-black relative shadow-lg shadow-black/20">
+                    <iframe
+                      src="https://maps.google.com/maps?q=Sahil%20Hair%20Expert%20Karnal%20Haryana&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0,}}
+                      allowFullScreen=""
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Sahil Hair Expert Location Map"
+                    />
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Social Channels Row */}
+              <div className="pt-6 border-t border-luxury-text/10 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <span className="text-xs text-luxury-text/40 uppercase tracking-widest font-mono">connect digitally</span>
+                <div className="flex gap-4">
+                  {[
+                    { id: "insta", icon: Instagram, link: "https://www.instagram.com/sahil__hair_expert?utm_source=qr" },
+                    { id: "facebook", icon: Facebook, link: "https://www.facebook.com/SahilHairStylist/" },
+                    { id: "youtube", icon: Youtube, link: "https://youtube.com/@hairexpertsahil?si=uo1fGLZ_VXCa1CKA" }
+                  ].map((chan) => {
+                    const IconComponent = chan.icon;
+                    return (
+                      <a
+                        key={chan.id}
+                        href={chan.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="w-10 h-10 border border-luxury-text/10 hover:border-luxury-gold hover:text-luxury-gold rounded-full flex items-center justify-center transition-all duration-300 text-luxury-text/50"
+                      >
+                        <IconComponent size={16} />
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+
+            </motion.div>
+          )}
+
+        </AnimatePresence>
+      </div>
+
+    </div>
+  );
+}
