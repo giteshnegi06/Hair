@@ -316,17 +316,17 @@ export default function BookingWidget({ activeTab: propActiveTab, setActiveTab: 
 
     // Prepare Whatsapp message
     const waMessage = 
-      `*SAHIL HAIR EXPERT - APPOINTMENT REQUEST*\n\n` +
-      `📅 *Date:* ${formattedDate}\n` +
-      `⏰ *Time Slot:* ${selectedTimeSlot}\n` +
-      `💈 *Stylist:* ${selectedExpert ? selectedExpert.name : "Any Available"}\n` +
-      `✂️ *Services:* ${serviceTitles}\n` +
-      `💳 *Total Cost:* ₹${totalPrice}\n\n` +
-      `*Client Details:*\n` +
-      `• *Name:* ${formName}\n` +
-      `• *Phone:* ${formPhone}\n` +
-      `• *Email:* ${formEmail || "N/A"}\n` +
-      `• *Special Request:* ${formNotes || "None"}\n\n` +
+      `SAHIL HAIR EXPERT - APPOINTMENT REQUEST\n\n` +
+      `Date: ${formattedDate}\n` +
+      `Time Slot: ${selectedTimeSlot}\n` +
+      `Stylist: ${selectedExpert ? selectedExpert.name : "Any Available"}\n` +
+      `Services: ${serviceTitles}\n` +
+      `Total Cost: ₹${totalPrice}\n\n` +
+      `Client Details:\n` +
+      `• Name: ${formName}\n` +
+      `• Phone: ${formPhone}\n` +
+      `• Email: ${formEmail || "N/A"}\n` +
+      `• Special Request: ${formNotes || "None"}\n\n` +
       `_Please confirm my booking slot. Thank you!_`;
 
     const whatsappUrl = `https://wa.me/919992310449?text=${encodeURIComponent(waMessage)}`;
