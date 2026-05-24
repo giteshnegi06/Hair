@@ -1,6 +1,8 @@
  function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }import React, { useState, } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import logo from "../Images/Sahil_hair_expert.png";
+import Perming from "../Images/perming.png";
+import Bridal from "../Images/Bridal.jpg";
 import {
  
   ChevronLeft, 
@@ -184,9 +186,9 @@ const testimonials = [
 // Gallery Images
 const galleryImages = [
   {
-    url: "./src/Images/perming.png",
-    title: "Master Styling cut",
-    category: "Styling"
+    url: "Perming",
+    title: "Perming & Texture Artistry",
+    category: "Treatments"
   },
   {
     url: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800",
@@ -199,7 +201,7 @@ const galleryImages = [
     category: "Health"
   },
   {
-    url: "./src/Images/Bridal.jpg",
+    url: "Bridal",
     title: "Bridal Hair Artistry",
     category: "Makeover"
   }
