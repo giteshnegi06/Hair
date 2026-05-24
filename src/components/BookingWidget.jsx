@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "motion/react";
 import logo from "../Images/Sahil_hair_expert.png";
 import Perming from "../Images/perming.png";
 import Bridal from "../Images/Bridal.jpg";
+import Styling from "../Images/Stlying.jpg";
+import Treatement from "../Images/HAirtreatement.jpg";
 import {
  
   ChevronLeft, 
@@ -196,14 +198,14 @@ const galleryImages = [
     category: "Makeover"
   },
   {
-    url: "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=800",
-    title: "Hair follicular Healing",
-    category: "Health"
+    url: Styling,
+    title: "Signature Hair Styling",
+    category: "Styling"
   },
   {
-    url: "https://unsplash.com/photos/a-woman-in-a-red-and-gold-bridal-outfit-Po-nggQqplE",
-    title: "Bridal Hair Artistry",
-    category: "Makeover"
+    url: Treatement,
+    title: "Wigs & Hair Patching",
+    category: "Treatments"
   },
 ];
 
@@ -393,7 +395,7 @@ See you soon at Sahil Hair Expert.
 
     // Empty spaces for padding
     for (let i = 0; i < firstDayIdx; i++) {
-      dayCells.push(<div key={`pad-${i}`} className="w-full aspect-square text-transparent max-w-[40px] flex items-center justify-center" />);
+      dayCells.push(<div key={`pad-${i}`} className="w-full aspect-square text-transparent max-w-10 flex items-center justify-center" />);
     }
 
     // Days grid
@@ -411,7 +413,7 @@ See you soon at Sahil Hair Expert.
           type="button"
           disabled={isPast}
           onClick={() => setSelectedDate(dateToCheck)}
-          className={`w-full aspect-square text-xs font-semibold rounded-full flex items-center justify-center transition-all duration-300 max-w-[40px]
+          className={`w-full aspect-square text-xs font-semibold rounded-full flex items-center justify-center transition-all duration-300 max-w-10
             ${isPast 
               ? "opacity-20 cursor-not-allowed text-luxury-text/40" 
               : "cursor-pointer text-luxury-text hover:bg-luxury-gold hover:text-black"
@@ -435,7 +437,7 @@ See you soon at Sahil Hair Expert.
         <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-5">
           {/* Circular Salon Logo */}
           <div className="relative">
-            <div className="w-20 h-20 flex-shrink-0 rounded-full border border-luxury-gold/30 bg-black flex items-center justify-center overflow-hidden">
+            <div className="w-20 h-20 shrink-0 rounded-full border border-luxury-gold/30 bg-black flex items-center justify-center overflow-hidden">
               {/* <Scissors className=" text-luxury-gold" /> */}
               <img src={logo} alt="Sahil_hair_expert" className="w-22 h-22" />
             </div>
@@ -449,7 +451,7 @@ See you soon at Sahil Hair Expert.
             </div>
             
             <p className="text-xs text-luxury-text/60 font-light flex items-center justify-center md:justify-start gap-1">
-              <MapPin className="w-3.5 h-3.5 text-luxury-gold flex-shrink-0" />
+              <MapPin className="w-3.5 h-3.5 text-luxury-gold shrink-0" />
               Dugra Colony Road, Sec 34, Karnal, Haryana 132001
             </p>
             
@@ -521,7 +523,7 @@ See you soon at Sahil Hair Expert.
       </div>
 
       {/* Primary Tab View Panel */}
-      <div className="min-h-[450px]">
+      <div className="min-h-112.5">
         <AnimatePresence mode="wait">
           
           {/* TAB 1: BOOKING WIZARD */}
@@ -802,7 +804,7 @@ See you soon at Sahil Hair Expert.
                       {/* Calendar Weekday headers */}
                       <div className="grid grid-cols-7 gap-1 text-center font-bold mb-3 justify-items-center">
                         {["S", "M", "T", "W", "T", "F", "S"].map((d, idx) => (
-                          <span key={`${d}-${idx}`} className="w-full text-[10px] text-luxury-gold font-mono block text-center max-w-[40px]">{d}</span>
+                          <span key={`${d}-${idx}`} className="w-full text-[10px] text-luxury-gold font-mono block text-center max-w-10">{d}</span>
                         ))}
                       </div>
 
@@ -832,7 +834,7 @@ See you soon at Sahil Hair Expert.
                         ) : (
                           <div className="flex-1 space-y-3">
                             <span className="text-[10px] uppercase tracking-widest text-luxury-text/45 font-mono block mb-2 font-bold">Pick your time slot:</span>
-                            <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-2 gap-2 max-h-[220px] overflow-y-auto pr-1 text-xs no-scrollbar">
+                            <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-2 gap-2 max-h-55 overflow-y-auto pr-1 text-xs no-scrollbar">
                               {timeSlots.map((time) => {
                                 const isSelected = selectedTimeSlot === time;
                                 return (
@@ -996,7 +998,7 @@ See you soon at Sahil Hair Expert.
                               </span>
                             </div>
                             <div>
-                              <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 font-mono block font-mono">time slot</span>
+                              <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 block font-mono">time slot</span>
                               <span className="text-white font-mono font-semibold">
                                 {selectedTimeSlot}
                               </span>
@@ -1051,7 +1053,7 @@ See you soon at Sahil Hair Expert.
                   <div className="bg-luxury-text/5 border border-luxury-text/10 rounded-xl p-5 text-left text-xs space-y-2.5">
                     <div className="flex justify-between border-b border-luxury-text/10 pb-2">
                       <span className="text-luxury-text/40 uppercase tracking-widest">Service items:</span>
-                      <span className="font-semibold text-white truncate max-w-[200px]">
+                      <span className="font-semibold text-white truncate max-w-50">
                         {selectedServices.map(s => s.title).join(", ")}
                       </span>
                     </div>
@@ -1142,13 +1144,13 @@ See you soon at Sahil Hair Expert.
                       key={stylist.id} 
                       className="bg-luxury-text/5 border border-luxury-text/10 rounded-xl overflow-hidden flex flex-col justify-between group hover:border-luxury-gold/40 transition-all duration-500"
                     >
-                      <div className="aspect-[3/4] relative overflow-hidden bg-black/60">
+                      <div className="aspect-3/4 relative overflow-hidden bg-black/60">
                         <img 
                           src={stylist.image} 
                           alt={stylist.name} 
-                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-[1200ms] ease-in-out group-hover:scale-105" 
+                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1200 ease-in-out group-hover:scale-105" 
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                        <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent opacity-60" />
                       </div>
 
                       <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
@@ -1283,15 +1285,15 @@ See you soon at Sahil Hair Expert.
                 {galleryImages.map((image, i) => (
                   <div 
                     key={i} 
-                    className="group relative aspect-[3/4] rounded-xl overflow-hidden border border-luxury-text/10 bg-black"
+                    className="group relative aspect-3/4 rounded-xl overflow-hidden border border-luxury-text/10 bg-black"
                   >
                     <img 
                       src={image.url} 
                       alt={image.title} 
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-[1200ms] group-hover:scale-105" 
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1200 group-hover:scale-105" 
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5" />
                     
                     {/* Tiny watermark */}
                     <div className="absolute bottom-4 left-4 right-4 z-10 flex flex-col bg-black/60 backdrop-blur-md border border-white/5 p-3 rounded opacity-0 group-hover:opacity-100 transition-all duration-500">
