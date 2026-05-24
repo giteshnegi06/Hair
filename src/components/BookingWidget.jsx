@@ -199,9 +199,9 @@ const galleryImages = [
     category: "Health"
   },
   {
-    url: "https://images.unsplash.com/photo-1527799822367-3d88bf0c4738?auto=format&fit=crop&q=80&w=800",
-    title: "Texture Hair Perming",
-    category: "Texture"
+    url: "./src/Images/Bridal.jpg",
+    title: "Bridal Hair Artistry",
+    category: "Makeover"
   }
 ];
 
