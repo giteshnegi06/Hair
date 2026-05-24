@@ -184,7 +184,7 @@ const testimonials = [
 // Gallery Images
 const galleryImages = [
   {
-    url: "https://images.unsplash.com/photo-1595053826286-2e59efd9ff18?auto=format&fit=crop&q=80&w=800",
+    url: "./src/Images/perming.png",
     title: "Master Styling cut",
     category: "Styling"
   },
