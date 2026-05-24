@@ -186,12 +186,12 @@ const testimonials = [
 // Gallery Images
 const galleryImages = [
   {
-    url: "Perming",
+    url: Perming,
     title: "Perming & Texture Artistry",
     category: "Treatments"
   },
   {
-    url: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800",
+    url: Bridal,
     title: "Bridal Royale Setup",
     category: "Makeover"
   },
@@ -201,10 +201,10 @@ const galleryImages = [
     category: "Health"
   },
   {
-    url: "Bridal",
+    url: "https://unsplash.com/photos/a-woman-in-a-red-and-gold-bridal-outfit-Po-nggQqplE",
     title: "Bridal Hair Artistry",
     category: "Makeover"
-  }
+  },
 ];
 
 // Available hours data
