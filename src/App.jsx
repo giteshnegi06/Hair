@@ -43,7 +43,7 @@ export default function App() {
             Welcome to Our Booking Desk
           </span>
           <h2 className="text-4xl md:text-6xl font-serif text-white mb-4 italic tracking-wide text-center">
-            Elite Hairstyling & Grooming
+            Elite Hairstyling & Hair Treatments.
           </h2>
           <p className="text-sm text-luxury-text/50 max-w-xl mx-auto font-light leading-relaxed">
             Reserve your session instantly with our master artisan team. Set your services, 
