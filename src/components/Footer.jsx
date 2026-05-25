@@ -25,7 +25,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <h4 className="text-[10px] uppercase tracking-[0.5em] font-bold mb-8 text-luxury-gold">Contact</h4>
             <div className="text-sm text-luxury-text/80 space-y-2 font-light">
-              <a href="tel:+919876543210" className="block hover:text-luxury-gold transition-colors">+91 98765 43210</a>
+              <a href="tel:+919992310449" className="block hover:text-luxury-gold transition-colors">+91 99923 10449</a>
               <a href="mailto:hello@sahilhairexpert.com" className="block hover:text-luxury-gold transition-colors">hello@sahilhairexpert.com</a>
             </div>
           </div>
