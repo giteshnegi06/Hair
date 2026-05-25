@@ -64,7 +64,7 @@ export default function Footer() {
         </div>
         
         <div className="pt-12 border-t border-luxury-text/5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-[10px] uppercase tracking-widest text-luxury-text/40">
+          <p className="text-[10px] uppercase tracking-widest text-luxury-text/40 text-center md:text-left">
             © 2026 Sahil Hair Expert. All rights reserved.
           </p>
           <div className="flex space-x-8 text-[10px] uppercase tracking-widest text-luxury-text/40">
