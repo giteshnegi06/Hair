@@ -211,13 +211,13 @@ const galleryImages = [
 
 // Available hours data
 const businessHours = [
-  { day: "Monday", hours: "9:00 AM - 9:00 PM", status: "Open" },
-  { day: "Tuesday", hours: "9:00 AM - 9:00 PM", status: "Open" },
-  { day: "Wednesday", hours: "9:00 AM - 9:00 PM", status: "Open" },
-  { day: "Thursday", hours: "9:00 AM - 9:00 PM", status: "Open" },
-  { day: "Friday", hours: "9:00 AM - 9:00 PM", status: "Open" },
-  { day: "Saturday", hours: "9:00 AM - 9:00 PM", status: "Open" },
-  { day: "Sunday", hours: "9:00 AM - 9:00 PM", status: "Open" }
+  { day: "Monday", hours: "9:00 AM - 9:30 PM", status: "Open" },
+  { day: "Tuesday", hours: "9:00 AM - 9:30 PM", status: "Open" },
+  { day: "Wednesday", hours: "9:00 AM - 9:30 PM", status: "Open" },
+  { day: "Thursday", hours: "9:00 AM - 9:30 PM", status: "Open" },
+  { day: "Friday", hours: "9:00 AM - 9:30 PM", status: "Open" },
+  { day: "Saturday", hours: "9:00 AM - 9:30 PM", status: "Open" },
+  { day: "Sunday", hours: "9:00 AM - 9:30 PM", status: "Open" }
 ];
 
 
@@ -353,7 +353,7 @@ export default function BookingWidget({ activeTab: propActiveTab, setActiveTab: 
 
     const receiptText = `
 ========================================
-         SAHIL HAIR EXPERT
+        SAHIL HAIR EXPERT
        Appointment Receipt
 ========================================
 Date: ${formattedDate}
@@ -470,7 +470,7 @@ See you soon at Sahil Hair Expert.
         <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center w-full md:w-auto border-t md:border-t-0 md:border-l border-luxury-text/10 pt-4 md:pt-0 md:pl-8 gap-4 md:gap-1 text-center md:text-right">
           <div className="text-left md:text-right">
             <span className="text-[9px] uppercase tracking-widest text-luxury-gold block font-mono">Today Status</span>
-            <span className="text-xs font-semibold text-green-400">Open • Closes 9:00 PM</span>
+            <span className="text-xs font-semibold text-green-400">Open • Closes 9:30 PM</span>
           </div>
           <div className="text-right">
             <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 block font-mono">timezone</span>
