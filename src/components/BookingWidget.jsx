@@ -1,4 +1,4 @@
- function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }import React, { useState, } from "react";
+function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; } import React, { useState, } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import logo from "../Images/Sahil_hair_expert.png";
 import Perming from "../Images/perming.png";
@@ -6,17 +6,17 @@ import Bridal from "../Images/Bridal.jpg";
 import Styling from "../Images/Stlying.jpg";
 import Treatement from "../Images/HAirtreatement.jpg";
 import {
- 
-  ChevronLeft, 
-  ChevronRight, 
-  Clock, 
-  Calendar as CalendarIcon, 
-  Star, 
-  Check, 
-  Phone, 
-  MapPin, 
-  Sparkles, 
-  Scissors, 
+
+  ChevronLeft,
+  ChevronRight,
+  Clock,
+  Calendar as CalendarIcon,
+  Star,
+  Check,
+  Phone,
+  MapPin,
+  Sparkles,
+  Scissors,
   ArrowLeft,
   Smile,
   Instagram,
@@ -28,20 +28,22 @@ import {
 
 } from "lucide-react";
 
-// Existing Services Data Reorganized for Setmore Style
+// Service Categories divided into Male and Female, plus Styling, Treatments, and Individual Grooming
 const serviceCategories = [
   { id: "all", name: "All Services" },
-  { id: "packages", name: "Luxury Packages" },
+  { id: "male", name: "Men" },
+  { id: "female", name: "Women" },
   { id: "styling", name: "Hair Styling" },
   { id: "treatments", name: "Hair Treatments" },
   { id: "individual", name: "Individual Grooming" }
 ];
 
 const services = [
+  // --- MALE SERVICES ---
   {
     id: "essential-grooming",
     title: "Essential Grooming Package",
-    category: "packages",
+    category: ["male", "individual"],
     price: "₹500",
     numericPrice: 500,
     duration: "45 min",
@@ -50,7 +52,7 @@ const services = [
   {
     id: "signature-experience",
     title: "The Signature Experience",
-    category: "packages",
+    category: ["male", "individual"],
     price: "₹1,500",
     numericPrice: 1500,
     duration: "90 min",
@@ -59,7 +61,7 @@ const services = [
   {
     id: "bridal-groom-royale",
     title: "Bridal / Groom Royale",
-    category: "packages",
+    category: ["male", "individual"],
     price: "₹8,000",
     numericPrice: 8000,
     duration: "180 min",
@@ -68,25 +70,61 @@ const services = [
   {
     id: "signature-styling",
     title: "Signature Hair Styling",
-    category: "styling",
+    category: ["male", "styling"],
     price: "₹400",
     numericPrice: 400,
     duration: "30 min",
     description: "Precision couture haircuts and custom styling tailored to your facial structure and hair density."
   },
   {
-    id: "bridal-makeover",
-    title: "Bridal Royale Makeover",
-    category: "styling",
-    price: "₹6,000",
-    numericPrice: 6000,
+    id: "male-wig-patch",
+    title: "Wig & Patch",
+    category: ["male", "treatments"],
+    price: "₹8,000",
+    numericPrice: 8000,
     duration: "150 min",
-    description: "High-end luxurious bridal makeover, signature registry makeup, premium hair curls or updos tailored to adornment settings."
+    description: "Premium custom hair wig and patch installation tailored to your head structure and hairline."
   },
   {
-    id: "wig-hair-patch",
-    title: "Wig & Hair Patch",
-    category: "treatments",
+    id: "male-bridal-makeup",
+    title: "Bridal Makeup",
+    category: ["male", "individual"],
+    price: "₹15,000",
+    numericPrice: 15000,
+    duration: "240 min",
+    description: "Elite HD airbrush groom/bridal makeup, skin prep, hair setting, and styling for a flawless royal appearance."
+  },
+  {
+    id: "male-perming",
+    title: "Perming",
+    category: ["male", "treatments"],
+    price: "₹2,000",
+    numericPrice: 2000,
+    duration: "180 min",
+    description: "Professional hair perming to add defined curls, texture, and structural volume."
+  },
+  {
+    id: "male-curl-permanent",
+    title: "Curel Permanent",
+    category: ["male", "treatments"],
+    price: "₹5,000",
+    numericPrice: 5000,
+    duration: "300 min",
+    description: "Long-lasting permanent curl styling treatment with advanced protective hair formulas."
+  },
+  {
+    id: "male-hair-spa",
+    title: "Hair Spa",
+    category: ["male", "treatments"],
+    price: "₹500",
+    numericPrice: 500,
+    duration: "30 min",
+    description: "Nourishing scalp massage, steam treatment, and deep conditioning for hair rejuvenation."
+  },
+  {
+    id: "wig-hair-patch-luxury",
+    title: "Wig & Hair Patch (Luxury)",
+    category: ["male", "treatments"],
     price: "₹12,000",
     numericPrice: 12000,
     duration: "120 min",
@@ -95,7 +133,7 @@ const services = [
   {
     id: "perming-texture",
     title: "Perming & Texture Art",
-    category: "treatments",
+    category: ["male", "treatments"],
     price: "₹3,500",
     numericPrice: 3500,
     duration: "90 min",
@@ -104,7 +142,7 @@ const services = [
   {
     id: "hair-spa-healing",
     title: "Hair Spa & Healing",
-    category: "treatments",
+    category: ["male", "treatments"],
     price: "₹1,200",
     numericPrice: 1200,
     duration: "60 min",
@@ -113,11 +151,166 @@ const services = [
   {
     id: "beard-sculpting",
     title: "Beard Sculpting & Trim",
-    category: "individual",
+    category: ["male", "individual"],
     price: "₹250",
     numericPrice: 250,
     duration: "30 min",
     description: "Detailed beard design, precision trimmer and straight razor lines, premium sandalwood oil massage."
+  },
+
+  // --- FEMALE SERVICES ---
+  {
+    id: "female-hair-cut",
+    title: "Hair Cut",
+    category: ["female", "styling"],
+    price: "₹500",
+    numericPrice: 500,
+    duration: "60 min",
+    description: "Precision style haircut, wash, blow dry, and finishing style tailored to your face shape."
+  },
+  {
+    id: "female-highlight",
+    title: "Highlight",
+    category: ["female", "styling"],
+    price: "₹1,200",
+    numericPrice: 1200,
+    duration: "90 min",
+    description: "Professional streak highlights to add dimensions, depth, and vibrant color tones to your hair."
+  },
+  {
+    id: "female-smoothing",
+    title: "Smoothing",
+    category: ["female", "treatments"],
+    price: "₹3,000",
+    numericPrice: 3000,
+    duration: "180 min",
+    description: "Intense hair smoothing treatment for silky, frizz-free, and perfectly straight hair."
+  },
+  {
+    id: "female-kerashine",
+    title: "Kerashine",
+    category: ["female", "treatments"],
+    price: "₹4,500",
+    numericPrice: 4500,
+    duration: "180 min",
+    description: "Premium Kerashine treatment to restore keratin protein and add brilliant glossy shine."
+  },
+  {
+    id: "female-nanoplastic",
+    title: "Nanoplastic",
+    category: ["female", "treatments"],
+    price: "₹5,000",
+    numericPrice: 5000,
+    duration: "120 min",
+    description: "Advanced Nanoplastia hair restoration and straightening therapy using safe organic nano-nutrients."
+  },
+  {
+    id: "female-multivitamin-facial",
+    title: "Multivitamin Facial",
+    category: ["female", "individual"],
+    price: "₹1,500",
+    numericPrice: 1500,
+    duration: "60 min",
+    description: "Skin nourishing multivitamin facial to boost radiance, deep cleanse, and hydrate skin layers."
+  },
+  {
+    id: "female-hydra-facial",
+    title: "Hydra Facial",
+    category: ["female", "individual"],
+    price: "₹2,000",
+    numericPrice: 2000,
+    duration: "60 min",
+    description: "Advanced multi-step Hydra Facial for deep exfoliation, blackhead extraction, and intense hydration serum infusion."
+  },
+  {
+    id: "female-party-makeup",
+    title: "Party Makeup",
+    category: ["female", "individual"],
+    price: "₹1,500",
+    numericPrice: 1500,
+    duration: "90 min",
+    description: "Gorgeous party-ready makeup, subtle contouring, eye styling, and skin finish matching the occasion."
+  },
+  {
+    id: "female-engagement-makeup",
+    title: "Engagement Makeup",
+    category: ["female", "individual"],
+    price: "₹8,500",
+    numericPrice: 8500,
+    duration: "90 min",
+    description: "High-definition engagement makeup with matching hairstyling, lash extensions, and draping support."
+  },
+  {
+    id: "female-reception-makeup",
+    title: "Reception Makeup",
+    category: ["female", "individual"],
+    price: "₹15,000",
+    numericPrice: 15000,
+    duration: "120 min",
+    description: "Premium HD/Airbrush reception makeup, complex hairdos, detailed draping, and styling for a flawless look."
+  },
+  {
+    id: "female-hair-colour",
+    title: "Hair Colour",
+    category: ["female", "styling"],
+    price: "₹3,000",
+    numericPrice: 3000,
+    duration: "120 min",
+    description: "Full global hair colouring with high-grade ammonia-free salon shades."
+  },
+  {
+    id: "female-root-touchup",
+    title: "Root Touchup",
+    category: ["female", "styling"],
+    price: "₹800",
+    numericPrice: 800,
+    duration: "50 min",
+    description: "Quick precision touch-up to cover root regrowth and gray hair seamlessly."
+  },
+  {
+    id: "female-nails-basic",
+    title: "Nails Basic",
+    category: ["female", "individual"],
+    price: "₹500",
+    numericPrice: 500,
+    duration: "30 min",
+    description: "Basic nail grooming, shaping, cuticle care, and premium gel polish application."
+  },
+  {
+    id: "female-full-tip-set",
+    title: "Full Tip Set Nails",
+    category: ["female", "individual"],
+    price: "₹800",
+    numericPrice: 800,
+    duration: "30 min",
+    description: "Full set acrylic or gel nail extensions with customized shape extensions."
+  },
+  {
+    id: "female-ombre",
+    title: "Ombre Nails",
+    category: ["female", "individual"],
+    price: "₹1,000",
+    numericPrice: 1000,
+    duration: "30 min",
+    description: "Trendy gradient ombre nail art shading with smooth transitions."
+  },
+  {
+    id: "female-chrome",
+    title: "Chrome Nails",
+    category: ["female", "individual"],
+    price: "₹1,500",
+    numericPrice: 1500,
+    duration: "45 min",
+    description: "Luxury metallic chrome finish nail art coating over gel extensions."
+  },
+  {
+    id: "bridal-makeover",
+    title: "Bridal Royale Makeover",
+    category: ["female", "individual"],
+    price: "₹6,000",
+    numericPrice: 6000,
+    duration: "150 min",
+    description: "High-end luxurious bridal makeover, signature registry makeup, premium hair curls or updos tailored to adornment settings."
   }
 ];
 
@@ -228,23 +421,26 @@ const businessHours = [
 export default function BookingWidget({ activeTab: propActiveTab, setActiveTab: propSetActiveTab } = {}) {
   // Tabs: 'book' | 'experts' | 'reviews' | 'gallery' | 'about'
   const [internalActiveTab, setInternalActiveTab] = useState("book");
-  
+
   const activeTab = propActiveTab !== undefined ? propActiveTab : internalActiveTab;
   const setActiveTab = propSetActiveTab !== undefined ? propSetActiveTab : setInternalActiveTab;
-  
+
+  // Map active location: 'sec34' | 'sec13'
+  const [selectedMapLocation, setSelectedMapLocation] = useState("sec34");
+
   // Wizard Steps: 1 (Services) | 2 (Staff) | 3 (Time) | 4 (Details) | 5 (Success)
   const [wizardStep, setWizardStep] = useState(1);
   const [selectedServices, setSelectedServices] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [selectedExpert, setSelectedExpert] = useState(null);
-  
+
   // Date Picker State
   const [selectedDate, setSelectedDate] = useState(null);
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  
+
   // Slots State
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
-  
+
   // Contact details form
   const [formName, setFormName] = useState("");
   const [formPhone, setFormPhone] = useState("");
@@ -319,7 +515,7 @@ export default function BookingWidget({ activeTab: propActiveTab, setActiveTab: 
     const totalPrice = selectedServices.reduce((acc, s) => acc + s.numericPrice, 0);
 
     // Prepare Whatsapp message
-    const waMessage = 
+    const waMessage =
       `SAHIL HAIR EXPERT - APPOINTMENT REQUEST\n\n` +
       `Date: ${formattedDate}\n` +
       `Time Slot: ${selectedTimeSlot}\n` +
@@ -335,7 +531,7 @@ export default function BookingWidget({ activeTab: propActiveTab, setActiveTab: 
 
     const whatsappUrl = `https://wa.me/919992310449?text=${encodeURIComponent(waMessage)}`;
     setWhatsappMessageUrl(whatsappUrl);
-    
+
     // Open WhatsApp immediately without timeout to bypass browser popup blockers
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   };
@@ -414,8 +610,8 @@ See you soon at Sahil Hair Expert.
           disabled={isPast}
           onClick={() => setSelectedDate(dateToCheck)}
           className={`w-full aspect-square text-xs font-semibold rounded-full flex items-center justify-center transition-all duration-300 max-w-10
-            ${isPast 
-              ? "opacity-20 cursor-not-allowed text-luxury-text/40" 
+            ${isPast
+              ? "opacity-20 cursor-not-allowed text-luxury-text/40"
               : "cursor-pointer text-luxury-text hover:bg-luxury-gold hover:text-black"
             }
             ${isSelected ? "bg-luxury-gold text-black font-extrabold shadow-lg" : ""}
@@ -431,7 +627,7 @@ See you soon at Sahil Hair Expert.
 
   return (
     <div className="w-full max-w-5xl mx-auto px-4 md:px-6">
-      
+
       {/* Setmore Signature Business Card Header */}
       <div className="bg-luxury-text/5 border border-luxury-text/10 rounded-2xl p-6 md:p-8 mb-8 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-5">
@@ -443,18 +639,22 @@ See you soon at Sahil Hair Expert.
             </div>
             <span className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-black rounded-full shadow-lg" />
           </div>
-          
+
           <div className="space-y-1.5">
             <div className="flex flex-col sm:flex-row items-center gap-2">
               <h1 className="text-2xl md:text-3xl font-serif text-white tracking-wide">Sahil Hair Expert</h1>
               <span className="text-[9px] uppercase tracking-widest bg-luxury-gold/20 text-luxury-gold px-2.5 py-1 font-bold rounded">Karnal Studio</span>
             </div>
-            
-            <p className="text-xs text-luxury-text/60 font-light flex items-center justify-center md:justify-start gap-1">
+
+            <p className="text-xs text-luxury-text/60 font-light flex items-center justify-center md:justify-start gap-1.5 flex-wrap">
               <MapPin className="w-3.5 h-3.5 text-luxury-gold shrink-0" />
-              Dugra Colony Road, Sec 34, Karnal, Haryana 132001
+              <span>Sec 34 Studio</span>
+              <span className="w-1 h-1 bg-luxury-text/30 rounded-full" />
+              <span>Sec 13 Lounge</span>
+              <span className="w-1 h-1 bg-luxury-text/30 rounded-full" />
+              <span>Karnal, Haryana</span>
             </p>
-            
+
             {/* Reviews indicator */}
             <div className="flex items-center justify-center md:justify-start gap-2.5 text-xs">
               <div className="flex text-luxury-gold">
@@ -494,7 +694,7 @@ See you soon at Sahil Hair Expert.
             <button
               key={tab.id}
               onClick={() => {
-                setActiveTab(tab.id );
+                setActiveTab(tab.id);
                 // reset booking wizard state safely unless successful
                 if (tab.id === "book" && wizardStep === 5) {
                   setWizardStep(1);
@@ -505,16 +705,16 @@ See you soon at Sahil Hair Expert.
                 }
               }}
               className={`flex items-center gap-1.5 py-4 px-4 text-xs uppercase tracking-widest font-semibold transition-all duration-300 relative select-none cursor-pointer whitespace-nowrap
-                ${isActive 
-                  ? "text-luxury-gold font-bold" 
+                ${isActive
+                  ? "text-luxury-gold font-bold"
                   : "text-luxury-text/50 hover:text-luxury-text"}`}
             >
               <IconComponent size={14} className={isActive ? "text-luxury-gold" : "text-luxury-text/40"} />
               {tab.label}
               {isActive && (
-                <motion.div 
-                  layoutId="activeTabUnderline" 
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-luxury-gold" 
+                <motion.div
+                  layoutId="activeTabUnderline"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-luxury-gold"
                 />
               )}
             </button>
@@ -525,7 +725,7 @@ See you soon at Sahil Hair Expert.
       {/* Primary Tab View Panel */}
       <div className="min-h-112.5">
         <AnimatePresence mode="wait">
-          
+
           {/* TAB 1: BOOKING WIZARD */}
           {activeTab === "book" && (
             <motion.div
@@ -547,10 +747,10 @@ See you soon at Sahil Hair Expert.
                   ].map((s) => (
                     <div key={s.step} className="flex items-center gap-2 whitespace-nowrap px-2">
                       <div className={`w-6 h-6 rounded-full text-[10px] font-bold flex items-center justify-center transition-all duration-300
-                        ${wizardStep === s.step 
-                          ? "bg-luxury-gold text-black" 
-                          : wizardStep > s.step 
-                            ? "bg-green-500 text-white" 
+                        ${wizardStep === s.step
+                          ? "bg-luxury-gold text-black"
+                          : wizardStep > s.step
+                            ? "bg-green-500 text-white"
                             : "bg-luxury-text/10 text-luxury-text/50"}`}
                       >
                         {wizardStep > s.step ? <Check size={12} strokeWidth={3} /> : s.step}
@@ -587,8 +787,8 @@ See you soon at Sahil Hair Expert.
                         key={cat.id}
                         onClick={() => setCategoryFilter(cat.id)}
                         className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 whitespace-nowrap cursor-pointer
-                          ${categoryFilter === cat.id 
-                            ? "bg-luxury-gold text-black font-bold shadow-md shadow-luxury-gold/5" 
+                          ${categoryFilter === cat.id
+                            ? "bg-luxury-gold text-black font-bold shadow-md shadow-luxury-gold/5"
                             : "bg-luxury-text/5 hover:bg-luxury-text/10 text-luxury-text/60 border border-luxury-text/10"}`}
                       >
                         {cat.name}
@@ -599,7 +799,13 @@ See you soon at Sahil Hair Expert.
                   {/* Services Menu Cards Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {services
-                      .filter(s => categoryFilter === "all" || s.category === categoryFilter)
+                      .filter(s => {
+                        if (categoryFilter === "all") return true;
+                        if (Array.isArray(s.category)) {
+                          return s.category.includes(categoryFilter);
+                        }
+                        return s.category === categoryFilter;
+                      })
                       .map((service) => {
                         const isSelected = selectedServices.some(item => item.id === service.id);
                         return (
@@ -607,8 +813,8 @@ See you soon at Sahil Hair Expert.
                             key={service.id}
                             onClick={() => selectServiceToggle(service)}
                             className={`p-5 rounded-xl border transition-all duration-500 flex flex-col justify-between cursor-pointer group hover:scale-[1.01]
-                              ${isSelected 
-                                ? "bg-luxury-gold/5 border-luxury-gold shadow-lg shadow-luxury-gold/5" 
+                              ${isSelected
+                                ? "bg-luxury-gold/5 border-luxury-gold shadow-lg shadow-luxury-gold/5"
                                 : "bg-luxury-text/5 border-luxury-text/10 hover:border-luxury-gold/40"}`}
                           >
                             <div className="space-y-1.5">
@@ -679,7 +885,7 @@ See you soon at Sahil Hair Expert.
               {wizardStep === 2 && (
                 <div className="space-y-6">
                   <div>
-                    <button 
+                    <button
                       onClick={() => setWizardStep(1)}
                       className="flex items-center gap-1.5 text-xs text-luxury-gold uppercase tracking-widest font-semibold hover:underline mb-3 cursor-pointer"
                     >
@@ -698,17 +904,17 @@ See you soon at Sahil Hair Expert.
                           key={barber.id}
                           onClick={() => setSelectedExpert(barber)}
                           className={`p-4 rounded-xl border transition-all duration-500 cursor-pointer text-center flex flex-col items-center justify-between group
-                            ${isSelected 
-                              ? "bg-luxury-gold/5 border-luxury-gold shadow-lg shadow-luxury-gold/5" 
+                            ${isSelected
+                              ? "bg-luxury-gold/5 border-luxury-gold shadow-lg shadow-luxury-gold/5"
                               : "bg-luxury-text/5 border-luxury-text/10 hover:border-luxury-gold/40"}`}
                         >
                           <div className={`w-20 h-20 rounded-full overflow-hidden border-2 mb-4 group-hover:scale-105 transition-transform duration-500
                             ${isSelected ? "border-luxury-gold" : "border-luxury-text/10"}`}
                           >
-                            <img 
-                              src={barber.image} 
-                              alt={barber.name} 
-                              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" 
+                            <img
+                              src={barber.image}
+                              alt={barber.name}
+                              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                             />
                           </div>
 
@@ -727,8 +933,8 @@ See you soon at Sahil Hair Expert.
                           <button
                             type="button"
                             className={`mt-4 w-full py-2 rounded text-[10px] font-bold uppercase tracking-wider border transition-all duration-300
-                              ${isSelected 
-                                ? "bg-luxury-gold text-black border-luxury-gold" 
+                              ${isSelected
+                                ? "bg-luxury-gold text-black border-luxury-gold"
                                 : "border-luxury-text/10 text-luxury-text/50 hover:bg-luxury-text/5"}`}
                           >
                             {isSelected ? "Selected" : "Select"}
@@ -768,7 +974,7 @@ See you soon at Sahil Hair Expert.
               {wizardStep === 3 && (
                 <div className="space-y-6">
                   <div>
-                    <button 
+                    <button
                       onClick={() => setWizardStep(2)}
                       className="flex items-center gap-1.5 text-xs text-luxury-gold uppercase tracking-widest font-semibold hover:underline mb-3 cursor-pointer"
                     >
@@ -782,9 +988,9 @@ See you soon at Sahil Hair Expert.
                     {/* Left Column: Calendar (Solid UI) */}
                     <div className="lg:col-span-7 bg-luxury-text/5 border border-luxury-text/10 p-5 rounded-2xl">
                       <div className="flex items-center justify-between mb-4 pb-2 border-b border-luxury-text/10">
-                        <button 
-                          type="button" 
-                          onClick={handlePrevMonth} 
+                        <button
+                          type="button"
+                          onClick={handlePrevMonth}
                           className="p-1.5 font-bold hover:text-luxury-gold transition-colors cursor-pointer"
                         >
                           <ChevronLeft size={16} />
@@ -792,9 +998,9 @@ See you soon at Sahil Hair Expert.
                         <span className="text-xs uppercase tracking-widest font-mono font-bold text-white">
                           {currentMonth.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
                         </span>
-                        <button 
-                          type="button" 
-                          onClick={handleNextMonth} 
+                        <button
+                          type="button"
+                          onClick={handleNextMonth}
                           className="p-1.5 font-bold hover:text-luxury-gold transition-colors cursor-pointer"
                         >
                           <ChevronRight size={16} />
@@ -820,7 +1026,7 @@ See you soon at Sahil Hair Expert.
                         <div className="mb-4 pb-2 border-b border-luxury-text/10 text-center lg:text-left">
                           <span className="text-[9px] uppercase tracking-widest text-luxury-gold font-mono block">Chosen date</span>
                           <span className="text-sm font-semibold text-white">
-                            {selectedDate 
+                            {selectedDate
                               ? selectedDate.toLocaleDateString("en-US", { weekday: "short", month: "long", day: "numeric", year: "numeric" })
                               : "No date selected"}
                           </span>
@@ -843,8 +1049,8 @@ See you soon at Sahil Hair Expert.
                                     type="button"
                                     onClick={() => setSelectedTimeSlot(time)}
                                     className={`py-2 px-3 rounded text-center border font-mono tracking-tighter transition-all duration-300 text-[10px] font-bold cursor-pointer
-                                      ${isSelected 
-                                        ? "bg-luxury-gold border-luxury-gold text-black shadow-md font-extrabold" 
+                                      ${isSelected
+                                        ? "bg-luxury-gold border-luxury-gold text-black shadow-md font-extrabold"
                                         : "bg-luxury-text/5 border-luxury-text/10 text-luxury-text/70 hover:border-luxury-gold/60"}`}
                                   >
                                     {time}
@@ -888,7 +1094,7 @@ See you soon at Sahil Hair Expert.
               {wizardStep === 4 && (
                 <div className="space-y-6">
                   <div>
-                    <button 
+                    <button
                       onClick={() => setWizardStep(3)}
                       className="flex items-center gap-1.5 text-xs text-luxury-gold uppercase tracking-widest font-semibold hover:underline mb-3 cursor-pointer"
                     >
@@ -954,7 +1160,7 @@ See you soon at Sahil Hair Expert.
                     <div className="lg:col-span-5">
                       <div className="bg-luxury-text/5 border border-luxury-gold/25 rounded-2xl p-5 space-y-4 relative overflow-hidden backdrop-blur-md">
                         <div className="absolute top-0 right-0 w-24 h-24 bg-luxury-gold/5 rounded-full blur-2xl" />
-                        
+
                         <h3 className="text-sm font-bold uppercase tracking-widest text-luxury-gold border-b border-luxury-text/10 pb-2.5 font-mono">
                           Review Request Detail
                         </h3>
@@ -1140,15 +1346,15 @@ See you soon at Sahil Hair Expert.
                 {barbers
                   .filter(b => b.id !== "any") // hide the mock 'any' option in informational list
                   .map((stylist) => (
-                    <div 
-                      key={stylist.id} 
+                    <div
+                      key={stylist.id}
                       className="bg-luxury-text/5 border border-luxury-text/10 rounded-xl overflow-hidden flex flex-col justify-between group hover:border-luxury-gold/40 transition-all duration-500"
                     >
                       <div className="aspect-3/4 relative overflow-hidden bg-black/60">
-                        <img 
-                          src={stylist.image} 
-                          alt={stylist.name} 
-                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1200 ease-in-out group-hover:scale-105" 
+                        <img
+                          src={stylist.image}
+                          alt={stylist.name}
+                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1200 ease-in-out group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent opacity-60" />
                       </div>
@@ -1163,11 +1369,11 @@ See you soon at Sahil Hair Expert.
                               Top Rated
                             </span>
                           </div>
-                          
+
                           <span className="text-[9px] uppercase tracking-widest font-bold text-luxury-gold font-mono block">
                             {stylist.role}
                           </span>
-                          
+
                           <p className="text-xs text-luxury-text/65 font-light leading-relaxed pt-1.5">
                             {stylist.bio}
                           </p>
@@ -1225,8 +1431,8 @@ See you soon at Sahil Hair Expert.
               {/* Reviews Cards List */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {testimonials.map((review, idx) => (
-                  <div 
-                    key={idx} 
+                  <div
+                    key={idx}
                     className="p-6 bg-luxury-text/5 border border-luxury-text/10 rounded-xl flex flex-col justify-between space-y-4 hover:border-luxury-gold/30 transition-colors duration-500"
                   >
                     <div className="space-y-3">
@@ -1249,7 +1455,7 @@ See you soon at Sahil Hair Expert.
                         <h4 className="font-serif font-bold text-white text-sm">{review.name}</h4>
                         <span className="text-[9px] uppercase tracking-widest text-luxury-gold font-bold font-mono">{review.role}</span>
                       </div>
-                      
+
                       <div className="flex items-center gap-1 text-[8px] uppercase tracking-widest font-mono text-green-400 font-bold bg-green-500/10 px-2 py-0.5 rounded">
                         <Check size={8} strokeWidth={4} /> Verified Client
                       </div>
@@ -1283,18 +1489,18 @@ See you soon at Sahil Hair Expert.
               {/* Bento styled gallery images */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {galleryImages.map((image, i) => (
-                  <div 
-                    key={i} 
+                  <div
+                    key={i}
                     className="group relative aspect-3/4 rounded-xl overflow-hidden border border-luxury-text/10 bg-black"
                   >
-                    <img 
-                      src={image.url} 
-                      alt={image.title} 
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1200 group-hover:scale-105" 
+                    <img
+                      src={image.url}
+                      alt={image.title}
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1200 group-hover:scale-105"
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5" />
-                    
+
                     {/* Tiny watermark */}
                     <div className="absolute bottom-4 left-4 right-4 z-10 flex flex-col bg-black/60 backdrop-blur-md border border-white/5 p-3 rounded opacity-0 group-hover:opacity-100 transition-all duration-500">
                       <span className="text-[8px] uppercase tracking-wider text-luxury-gold font-bold font-mono">
@@ -1321,7 +1527,7 @@ See you soon at Sahil Hair Expert.
               className="bg-black/30 border border-luxury-text/10 rounded-2xl p-6 md:p-8 space-y-8"
             >
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-                
+
                 {/* Left Column: Studio description and active hours */}
                 <div className="md:col-span-7 space-y-6">
                   <div className="space-y-3">
@@ -1337,8 +1543,8 @@ See you soon at Sahil Hair Expert.
 
                   {/* Operational Contacts */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-luxury-text/10">
-                    <a 
-                      href="tel:+919992310449" 
+                    <a
+                      href="tel:+919992310449"
                       className="p-4 bg-luxury-text/5 border border-luxury-text/10 hover:border-luxury-gold/50 rounded-xl block group transition-colors duration-300"
                     >
                       <Phone className="w-5 h-5 text-luxury-gold mb-2 group-hover:bounce" />
@@ -1376,14 +1582,76 @@ See you soon at Sahil Hair Expert.
                 </div>
 
                 {/* Embedded Location Map with Dark Mode Custom Filter */}
-                <div className="md:col-span-12 space-y-3">
-                  <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-luxury-gold block font-mono">Location Map</span>
+                <div className="md:col-span-12 space-y-4">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                    <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-luxury-gold block font-mono">Location Map</span>
+                    <div className="flex gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedMapLocation("sec34")}
+                        className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all duration-300 border cursor-pointer select-none
+                          ${selectedMapLocation === "sec34"
+                            ? "bg-luxury-gold border-luxury-gold text-black shadow-md font-extrabold"
+                            : "bg-luxury-text/5 border-luxury-text/10 text-luxury-text/60 hover:bg-luxury-text/10"}`}
+                      >
+                        Sector 34 Studio
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedMapLocation("sec13")}
+                        className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all duration-300 border cursor-pointer select-none
+                          ${selectedMapLocation === "sec13"
+                            ? "bg-luxury-gold border-luxury-gold text-black shadow-md font-extrabold"
+                            : "bg-luxury-text/5 border-luxury-text/10 text-luxury-text/60 hover:bg-luxury-text/10"}`}
+                      >
+                        Sector 13 Lounge
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-luxury-text/5 border border-luxury-text/10 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                    <div className="flex items-start gap-2.5">
+                      <MapPin className="w-4 h-4 text-luxury-gold shrink-0 mt-0.5" />
+
+                      <div>
+                        <span className="text-white font-semibold text-xs block">
+                          {selectedMapLocation === "sec34"
+                            ? "Sector 34 Branch (Main Studio)"
+                            : "Sector 13 Branch (Premium Lounge)"}
+                        </span>
+
+                        <span className="text-luxury-text/60 text-xs font-light">
+                          {selectedMapLocation === "sec34"
+                            ? "Dugra Colony Road, Sec 34, Karnal, Haryana 132001"
+                            : "227L, First Floor, Model Town, Karnal, Haryana 132001"}
+                        </span>
+                      </div>
+                    </div>
+
+                    <a
+                      href={
+                        selectedMapLocation === "sec34"
+                          ? "https://www.google.com/maps?q=Sahil+Hair+Expert+Sec+34+Karnal+Haryana"
+                          : "https://maps.app.goo.gl/hXw14MggajfLJhVe9"
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[10px] uppercase tracking-wider font-bold text-luxury-gold hover:underline flex items-center gap-1 shrink-0"
+                    >
+                      Open in Maps <ExternalLink size={12} />
+                    </a>
+                  </div>
+
                   <div className="w-full h-64 md:h-80 rounded-xl overflow-hidden border border-luxury-text/10 bg-black relative shadow-lg shadow-black/20">
                     <iframe
-                      src="https://maps.google.com/maps?q=Sahil%20Hair%20Expert%20Karnal%20Haryana&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                      src={
+                        selectedMapLocation === "sec34"
+                          ? "https://www.google.com/maps?q=Sahil+Hair+Expert+Sec+34+Karnal+Haryana&output=embed"
+                          : "https://www.google.com/maps?q=29.7028056,77.0001667&output=embed"
+                      }
                       width="100%"
                       height="100%"
-                      style={{ border: 0,}}
+                      style={{ border: 0 }}
                       allowFullScreen=""
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
