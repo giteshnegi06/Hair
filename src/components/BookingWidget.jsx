@@ -5,6 +5,9 @@ import Perming from "../Images/perming.png";
 import Bridal from "../Images/Bridal.jpg";
 import Styling from "../Images/Stlying.jpg";
 import Treatement from "../Images/HAirtreatement.jpg";
+import Rahul from "../Images/Rahul.jpeg";
+import Vicke from "../Images/Vicke.jpeg";
+
 import {
 
   ChevronLeft,
@@ -335,14 +338,14 @@ const barbers = [
     name: "Vikram",
     role: "Texture & Treatment Specialist",
     bio: "Expert in heavy texturing, premium perming, hair coloring formulas, and complex non-surgical replacements.",
-    image: "https://images.unsplash.com/photo-1621605815971-fbc38c665434?auto=format&fit=crop&q=80&w=800"
+    image: Vicke
   },
   {
     id: "arjun",
     name: "Arjun",
     role: "Senior Barber Architect",
     bio: "Classic blade artisan, expert in hyper-detailed tapers, mid to low skin fades, and luxury beard sculpting contours.",
-    image: "https://images.unsplash.com/photo-1542382156909-9ae37b3f56fd?auto=format&fit=crop&q=80&w=800"
+    image: Rahul
   }
 ];
 
@@ -914,7 +917,7 @@ See you soon at Sahil Hair Expert.
                             <img
                               src={barber.image}
                               alt={barber.name}
-                              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                              className="w-full h-full object-cover grayscale"
                             />
                           </div>
 
@@ -1348,49 +1351,37 @@ See you soon at Sahil Hair Expert.
                   .map((stylist) => (
                     <div
                       key={stylist.id}
-                      className="bg-luxury-text/5 border border-luxury-text/10 rounded-xl overflow-hidden flex flex-col justify-between group hover:border-luxury-gold/40 transition-all duration-500"
+                      className="p-6 rounded-xl border border-luxury-text/10 bg-luxury-text/5 hover:border-luxury-gold/40 transition-all duration-500 text-center flex flex-col items-center justify-between group"
                     >
-                      <div className="aspect-3/4 relative overflow-hidden bg-black/60">
+                      <div className="w-20 h-20 rounded-full overflow-hidden border-2 mb-4 border-luxury-text/10 group-hover:scale-105 transition-transform duration-500">
                         <img
                           src={stylist.image}
                           alt={stylist.name}
-                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1200 ease-in-out group-hover:scale-105"
+                          className="w-full h-full object-cover grayscale"
                         />
-                        <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent opacity-60" />
                       </div>
 
-                      <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                        <div className="space-y-1.5">
-                          <div className="flex justify-between items-start">
-                            <h3 className="text-lg font-serif text-white tracking-wide group-hover:text-luxury-gold transition-colors duration-300">
-                              {stylist.name}
-                            </h3>
-                            <span className="text-[8px] uppercase tracking-widest font-mono font-bold bg-luxury-gold/10 text-luxury-gold px-2 py-0.5 rounded border border-luxury-gold/20">
-                              Top Rated
-                            </span>
-                          </div>
-
-                          <span className="text-[9px] uppercase tracking-widest font-bold text-luxury-gold font-mono block">
-                            {stylist.role}
-                          </span>
-
-                          <p className="text-xs text-luxury-text/65 font-light leading-relaxed pt-1.5">
-                            {stylist.bio}
-                          </p>
-                        </div>
-
-                        {/* Booking shortcut CTA */}
-                        <div className="pt-4 border-t border-luxury-text/10">
-                          <button
-                            type="button"
-                            onClick={() => handleBookNowExpertDirect(stylist)}
-                            className="w-full bg-luxury-text/5 hover:bg-luxury-gold text-luxury-text/40 hover:text-black hover:border-luxury-gold py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-widest border border-luxury-text/10 transition-all duration-500 flex items-center justify-center gap-1.5 cursor-pointer"
-                          >
-                            <CalendarIcon size={12} />
-                            Schedule with {stylist.name}
-                          </button>
-                        </div>
+                      <div className="space-y-1.5 flex-1 flex flex-col items-center justify-start w-full">
+                        <h3 className="text-sm font-semibold text-white group-hover:text-luxury-gold transition-colors block">
+                          {stylist.name}
+                        </h3>
+                        <span className="text-[9px] uppercase tracking-wider text-luxury-gold bg-luxury-gold/10 px-2 py-0.5 rounded font-bold font-mono">
+                          {stylist.role}
+                        </span>
+                        <p className="text-[11px] text-luxury-text/50 font-light leading-relaxed pt-2 pb-4 line-clamp-3">
+                          {stylist.bio}
+                        </p>
                       </div>
+
+                      {/* Booking shortcut CTA */}
+                      <button
+                        type="button"
+                        onClick={() => handleBookNowExpertDirect(stylist)}
+                        className="mt-4 w-full py-2 bg-luxury-text/5 hover:bg-luxury-gold text-luxury-text/40 hover:text-black hover:border-luxury-gold rounded text-[10px] font-bold uppercase tracking-wider border border-luxury-text/10 transition-all duration-300 flex items-center justify-center gap-1.5 cursor-pointer"
+                      >
+                        <CalendarIcon size={12} />
+                        Schedule with {stylist.name}
+                      </button>
                     </div>
                   ))}
               </div>
