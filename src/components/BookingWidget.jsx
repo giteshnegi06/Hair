@@ -1347,13 +1347,13 @@ See you soon at Sahil Hair Expert.
                 <p className="text-xs text-luxury-text/50">Our elite styling team pairs traditional, heritage razor skills with contemporary hair perming & restoration aesthetics.</p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {barbers
                   .filter(b => b.id !== "any") // hide the mock 'any' option in informational list
                   .map((stylist) => (
                     <div
                       key={stylist.id}
-                      className="p-6 rounded-xl border border-luxury-text/10 bg-luxury-text/5 hover:border-luxury-gold/40 transition-all duration-500 text-center flex flex-col items-center justify-between group"
+                      className="p-2 rounded-xl border border-luxury-text/10 bg-luxury-text/5 hover:border-luxury-gold/40 transition-all duration-500 text-center flex flex-col items-center justify-between group"
                     >
                       <div className="w-20 h-20 rounded-full overflow-hidden border-2 mb-4 border-luxury-text/10 group-hover:scale-105 transition-transform duration-500">
                         <img
@@ -1370,9 +1370,9 @@ See you soon at Sahil Hair Expert.
                         <span className="text-[9px] uppercase tracking-wider text-luxury-gold bg-luxury-gold/10 px-2 py-0.5 rounded font-bold font-mono">
                           {stylist.role}
                         </span>
-                        <p className="text-[11px] text-luxury-text/50 font-light leading-relaxed pt-2 pb-4 line-clamp-3">
+                        {/* <p className="text-[11px] text-luxury-text/50 font-light leading-relaxed pt-2 pb-4 line-clamp-3">
                           {stylist.bio}
-                        </p>
+                        </p> */}
                       </div>
 
                       {/* Booking shortcut CTA */}
@@ -1382,7 +1382,7 @@ See you soon at Sahil Hair Expert.
                         className="mt-4 w-full py-2 bg-luxury-text/5 hover:bg-luxury-gold text-luxury-text/40 hover:text-black hover:border-luxury-gold rounded text-[10px] font-bold uppercase tracking-wider border border-luxury-text/10 transition-all duration-300 flex items-center justify-center gap-1.5 cursor-pointer"
                       >
                         <CalendarIcon size={12} />
-                        Schedule with {stylist.name}
+                        Book{stylist.name}
                       </button>
                     </div>
                   ))}
