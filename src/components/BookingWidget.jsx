@@ -1347,7 +1347,7 @@ See you soon at Sahil Hair Expert.
                 <p className="text-xs text-luxury-text/50">Our elite styling team pairs traditional, heritage razor skills with contemporary hair perming & restoration aesthetics.</p>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {barbers
                   .filter(b => b.id !== "any") // hide the mock 'any' option in informational list
                   .map((stylist) => (
