@@ -1382,7 +1382,7 @@ See you soon at Sahil Hair Expert.
                         className="mt-4 w-full py-2 bg-luxury-text/5 hover:bg-luxury-gold text-luxury-text/40 hover:text-black hover:border-luxury-gold rounded text-[10px] font-bold uppercase tracking-wider border border-luxury-text/10 transition-all duration-300 flex items-center justify-center gap-1.5 cursor-pointer"
                       >
                         <CalendarIcon size={12} />
-                        Book{stylist.name}
+                        Book
                       </button>
                     </div>
                   ))}
