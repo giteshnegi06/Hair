@@ -9,7 +9,7 @@ export default function Navbar({ activeTab, onTabSelect, onBookNow }) {
     { label: "Book Now", tabId: "book" },
     { label: "Stylists", tabId: "experts" },
     { label: "Reviews", tabId: "reviews" },
-    { label: "Gallery", tabId: "gallery" },
+    { label: "Shop", tabId: "shop" },
     { label: "Hours & Info", tabId: "about" }
   ];
 

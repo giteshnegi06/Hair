@@ -1471,7 +1471,7 @@ See you soon at Sahil Hair Expert.
                     className="group bg-luxury-text/5 border border-luxury-text/10 rounded-xl overflow-hidden flex flex-col justify-between hover:border-luxury-gold/40 transition-all duration-500 hover:scale-[1.02]"
                   >
                     {/* Image Container */}
-                    <div className="relative aspect-square overflow-hidden bg-black/40">
+                    <div className="relative aspect-3/4 overflow-hidden bg-black/40">
                       <img
                         src={image.url}
                         alt={image.title}
