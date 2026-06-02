@@ -7,6 +7,7 @@ import Styling from "../Images/Stlying.jpg";
 import Treatement from "../Images/HAirtreatement.jpg";
 import Rahul from "../Images/Rahul.jpeg";
 import Vicke from "../Images/Vicke.jpeg";
+import Sahil from "../Images/Sahil.jpeg";
 
 import {
 
@@ -333,7 +334,7 @@ const barbers = [
     name: "Sahil",
     role: "Founder & Master Stylist",
     bio: "With over 15 years of expert experience, Sahil specializes in high-end transformations, wigs hair patching, and bridal aesthetics.",
-    image: "https://images.unsplash.com/photo-1599305090598-fe179d501227?auto=format&fit=crop&q=80&w=800"
+    image: Sahil
   },
   {
     id: "vikram",
