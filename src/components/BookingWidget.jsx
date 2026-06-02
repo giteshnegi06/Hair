@@ -36,7 +36,7 @@ const serviceCategories = [
   // { id: "all", name: "All Services" },
   { id: "male", name: "Men" },
   { id: "female", name: "Women" },
-  { id: "styling", name: "Hair Styling" },
+  // { id: "styling", name: "Hair Styling" },
   { id: "treatments", name: "Hair Treatments" },
   { id: "individual", name: "Individual Grooming" }
 ];
@@ -82,7 +82,7 @@ const services = [
   {
     id: "o3-facial",
     title: "O3+ Facial",
-    category: ["male", "treatments"],
+    category: ["male", "Individual"],
     price: "₹1,200",
     numericPrice: 1200,
     duration: "150 min",
@@ -91,7 +91,7 @@ const services = [
   {
     id: "hydra-facial",
     title: "Hydra Facial",
-    category: ["male", "treatments"],
+    category: ["male", "Individual"],
     price: "₹1,000",
     numericPrice: 1000,
     duration: "150 min",
