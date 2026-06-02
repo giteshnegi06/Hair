@@ -107,7 +107,7 @@ const services = [
   },
   {
     id: "male-curl-permanent",
-    title: "Curel Permanent",
+    title: "Curely Treatment",
     category: ["male", "treatments"],
     price: "₹5,000",
     numericPrice: 5000,
@@ -420,7 +420,7 @@ export default function BookingWidget({ activeTab: propActiveTab, setActiveTab: 
   // Wizard Steps: 1 (Services) | 2 (Staff) | 3 (Time) | 4 (Details) | 5 (Success)
   const [wizardStep, setWizardStep] = useState(1);
   const [selectedServices, setSelectedServices] = useState([]);
-  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [categoryFilter, setCategoryFilter] = useState("male");
   const [selectedExpert, setSelectedExpert] = useState(null);
 
   // Date Picker State
@@ -691,6 +691,7 @@ See you soon at Sahil Hair Expert.
                   setSelectedExpert(null);
                   setSelectedDate(null);
                   setSelectedTimeSlot("");
+                  setCategoryFilter("male");
                 }
               }}
               className={`flex items-center gap-1.5 py-4 px-4 text-xs uppercase tracking-widest font-semibold transition-all duration-300 relative select-none cursor-pointer whitespace-nowrap
