@@ -10,8 +10,7 @@ export default function Navbar({ activeTab, onTabSelect, onBookNow }) {
     { label: "Stylists", tabId: "experts" },
     { label: "Reviews", tabId: "reviews" },
     { label: "Gallery", tabId: "gallery" },
-    { label: "Hours & Info", tabId: "about" },
-    { label: "Shop", href: "https://shop.sahilhair.com", isExternal: true },
+    { label: "Hours & Info", tabId: "about" }
   ];
 
   return (
@@ -32,19 +31,6 @@ export default function Navbar({ activeTab, onTabSelect, onBookNow }) {
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex space-x-8 text-xs uppercase tracking-[0.2em] font-semibold">
           {menuItems.map((item) => {
-            if (item.isExternal) {
-              return (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-all duration-300 relative py-1 hover:text-luxury-gold text-luxury-text/60 cursor-pointer select-none"
-                >
-                  {item.label}
-                </a>
-              );
-            }
             const isActive = activeTab === item.tabId;
             return (
               <button 
@@ -101,20 +87,6 @@ export default function Navbar({ activeTab, onTabSelect, onBookNow }) {
           >
             <div className="flex flex-col px-6 py-5 space-y-4 text-xs uppercase tracking-[0.2em] font-semibold">
               {menuItems.map((item) => {
-                if (item.isExternal) {
-                  return (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-left py-2.5 transition-all duration-300 text-luxury-text/60 pl-0 cursor-pointer select-none hover:text-luxury-gold"
-                    >
-                      {item.label}
-                    </a>
-                  );
-                }
                 const isActive = activeTab === item.tabId;
                 return (
                   <button

@@ -1,10 +1,7 @@
 function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; } import React, { useState, } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import logo from "../Images/Sahil_hair_expert.png";
-import Perming from "../Images/perming.png";
-import Bridal from "../Images/Bridal.jpg";
-import Styling from "../Images/Stlying.jpg";
-import Treatement from "../Images/HAirtreatement.jpg";
+import Hairoil from "../Images/Hair oil.jpeg";
 import Rahul from "../Images/Rahul.jpeg";
 import Vicke from "../Images/Vicke.jpeg";
 import Sahil from "../Images/Sahil.jpeg";
@@ -20,7 +17,7 @@ import {
   Phone,
   MapPin,
   Sparkles,
-  Scissors,
+  ShoppingBag,
   ArrowLeft,
   Smile,
   Instagram,
@@ -98,7 +95,7 @@ const services = [
     duration: "150 min",
     description: "Premium custom hair wig and patch installation tailored to your head structure and hairline."
   },
-  
+
   {
     id: "male-perming",
     title: "Perming",
@@ -162,7 +159,7 @@ const services = [
     duration: "60 min",
     description: "Mineral oil-nourishing scalp massage, custom steam treatment, hydration hair mask, and deep follicular cleansing."
   },
-  
+
 
   // --- FEMALE SERVICES ---
   {
@@ -384,27 +381,13 @@ const testimonials = [
   }
 ];
 
-// Gallery Images
-const galleryImages = [
+// Products Images
+const products = [
   {
-    url: Perming,
-    title: "Perming & Texture Artistry",
-    category: "Treatments"
-  },
-  {
-    url: Bridal,
-    title: "Bridal Royale Setup",
-    category: "Makeover"
-  },
-  {
-    url: Styling,
-    title: "Signature Hair Styling",
-    category: "Styling"
-  },
-  {
-    url: Treatement,
-    title: "Wigs & Hair Patching",
-    category: "Treatments"
+    url: Hairoil,
+    title: "Generic Damage And Protection Hair oil",
+    category: "Shop",
+    buyUrl: "https://www.amazon.in/dp/B0G1SY3WWQ"
   },
 ];
 
@@ -691,7 +674,7 @@ See you soon at Sahil Hair Expert.
           { id: "book", label: "Book Appointment", icon: Sparkles },
           { id: "experts", label: "Our Stylists", icon: Smile },
           { id: "reviews", label: "Reviews", icon: Star },
-          { id: "gallery", label: "Gallery", icon: Scissors },
+          { id: "shop", label: "Shop", icon: ShoppingBag },
           { id: "about", label: "Hours & Info", icon: Clock4 }
         ].map((tab) => {
           const IconComponent = tab.icon;
@@ -1460,10 +1443,10 @@ See you soon at Sahil Hair Expert.
             </motion.div>
           )}
 
-          {/* TAB 4: STYLING GALLERY BENTO */}
-          {activeTab === "gallery" && (
+          {/* TAB 4: SHOP */}
+          {activeTab === "shop" && (
             <motion.div
-              key="tab-gallery"
+              key="tab-shop"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
@@ -1472,37 +1455,53 @@ See you soon at Sahil Hair Expert.
             >
               <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
-                  <h2 className="text-xl font-serif text-white uppercase tracking-wide">Client Artistry Showcase</h2>
-                  <p className="text-xs text-luxury-text/50">Raw visual captures exhibiting master styling, perming folds, and airbrush bridal settings.</p>
+                  <h2 className="text-xl font-serif text-white uppercase tracking-wide">Premium Product Shop</h2>
+                  <p className="text-xs text-luxury-text/50">Curated styling and hair care products recommended by Sahil Hair Expert.</p>
                 </div>
                 <span className="text-[9px] uppercase tracking-widest font-mono text-luxury-gold bg-luxury-gold/10 px-2.5 py-1 font-bold rounded">
-                  4 High Res Captures
+                  {products.length} Products Available
                 </span>
               </div>
 
-              {/* Bento styled gallery images */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {galleryImages.map((image, i) => (
+              {/* Product cards grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {products.map((image, i) => (
                   <div
                     key={i}
-                    className="group relative aspect-3/4 rounded-xl overflow-hidden border border-luxury-text/10 bg-black"
+                    className="group bg-luxury-text/5 border border-luxury-text/10 rounded-xl overflow-hidden flex flex-col justify-between hover:border-luxury-gold/40 transition-all duration-500 hover:scale-[1.02]"
                   >
-                    <img
-                      src={image.url}
-                      alt={image.title}
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1200 group-hover:scale-105"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-black via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5" />
+                    {/* Image Container */}
+                    <div className="relative aspect-square overflow-hidden bg-black/40">
+                      <img
+                        src={image.url}
+                        alt={image.title}
+                        className="w-full h-full object-cover"
+                        referrerPolicy="no-referrer"
+                      />
+                      {image.category && (
+                        <span className="absolute top-3 right-3 text-[8px] uppercase tracking-widest bg-black/80 text-luxury-gold px-2 py-0.5 font-bold rounded font-mono">
+                          {image.category}
+                        </span>
+                      )}
+                    </div>
 
-                    {/* Tiny watermark */}
-                    <div className="absolute bottom-4 left-4 right-4 z-10 flex flex-col bg-black/60 backdrop-blur-md border border-white/5 p-3 rounded opacity-0 group-hover:opacity-100 transition-all duration-500">
-                      <span className="text-[8px] uppercase tracking-wider text-luxury-gold font-bold font-mono">
-                        {image.category}
-                      </span>
-                      <span className="text-xs font-serif text-white font-semibold">
-                        {image.title}
-                      </span>
+                    {/* Info and Action under the Image */}
+                    <div className="p-4 flex flex-col justify-between flex-1 gap-4">
+                      <div className="space-y-1">
+                        <h3 className="text-xs font-semibold tracking-wide text-white group-hover:text-luxury-gold transition-colors duration-300">
+                          {image.title}
+                        </h3>
+                      </div>
+
+                      <a
+                        href={image.buyUrl || "https://www.amazon.in/dp/B0G1SY3WWQ"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-2 bg-luxury-gold text-black hover:bg-white text-[10px] uppercase tracking-[0.15em] font-extrabold transition-all duration-300 rounded flex items-center justify-center gap-1.5 cursor-pointer shadow-lg shadow-luxury-gold/5"
+                      >
+                        <ShoppingBag size={10} />
+                        Buy Now
+                      </a>
                     </div>
                   </div>
                 ))}
