@@ -24,7 +24,7 @@ export default function Footer() {
               </div>
               <div>
                 <span className="text-[10px] uppercase tracking-wider text-luxury-gold font-bold block mb-1">Sector 13 Studio</span>
-                <p>Near Dena Bank, Sector 13, Karnal, Haryana 132001 India</p>
+                <p>227L, First Floor, Model Town, Karnal, Haryana 132001</p>
               </div>
             </address>
           </div>

@@ -33,7 +33,7 @@ import {
 
 // Service Categories divided into Male and Female, plus Styling, Treatments, and Individual Grooming
 const serviceCategories = [
-  { id: "all", name: "All Services" },
+  // { id: "all", name: "All Services" },
   { id: "male", name: "Men" },
   { id: "female", name: "Women" },
   { id: "styling", name: "Hair Styling" },
@@ -800,7 +800,7 @@ See you soon at Sahil Hair Expert.
                   </div>
 
                   {/* Services Menu Cards Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {services
                       .filter(s => {
                         if (categoryFilter === "all") return true;
@@ -829,9 +829,9 @@ See you soon at Sahil Hair Expert.
                                   {service.price}
                                 </span>
                               </div>
-                              <p className="text-xs text-luxury-text/65 font-light leading-relaxed line-clamp-2">
+                              {/* <p className="text-xs text-luxury-text/65 font-light leading-relaxed line-clamp-2">
                                 {service.description}
-                              </p>
+                              </p> */}
                             </div>
 
                             <div className="flex items-center justify-between pt-4 mt-4 border-t border-luxury-text/10 text-[10px] uppercase font-mono tracking-wider">
