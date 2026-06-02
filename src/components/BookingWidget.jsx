@@ -1,6 +1,6 @@
 function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; } import React, { useState, } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import logo from "../Images/Sahil_hair_expert.png";
+import logo from "../Images/Logo.jpeg";
 import Hairoil from "../Images/Hair oil.jpeg";
 import Rahul from "../Images/Rahul.jpeg";
 import Vicke from "../Images/Vicke.jpeg";
@@ -624,7 +624,7 @@ See you soon at Sahil Hair Expert.
           <div className="relative">
             <div className="w-20 h-20 shrink-0 rounded-full border border-luxury-gold/30 bg-black flex items-center justify-center overflow-hidden">
               {/* <Scissors className=" text-luxury-gold" /> */}
-              <img src={logo} alt="Sahil_hair_expert" className="w-22 h-22" />
+              <img src={Sahil} alt="Sahil_hair_expert" className="w-22 h-22" />
             </div>
             <span className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-black rounded-full shadow-lg" />
           </div>
