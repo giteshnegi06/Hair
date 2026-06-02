@@ -44,6 +44,15 @@ const serviceCategories = [
 const services = [
   // --- MALE SERVICES ---
   {
+    id: "haircut-beard-sculpt",
+    title: "Haircut & Beard Sculpt",
+    category: ["male", "individual"],
+    price: "₹200",
+    numericPrice: 200,
+    duration: "45 min",
+    description: "Standard styled haircut, refreshing hair wash, and professional beard sculpting with razor lines."
+  },
+  {
     id: "essential-grooming",
     title: "Essential Grooming Package",
     category: ["male", "individual"],
@@ -53,50 +62,42 @@ const services = [
     description: "Standard styled haircut, refreshing hair wash, and professional beard sculpting with razor lines."
   },
   {
-    id: "signature-experience",
-    title: "The Signature Experience",
+    id: "full-wax",
+    title: "Full Wax",
     category: ["male", "individual"],
-    price: "₹1,500",
-    numericPrice: 1500,
-    duration: "90 min",
+    price: "₹800",
+    numericPrice: 800,
+    duration: "40 min",
     description: "Sahil's signature precision haircut, luxurious hot-towel beard design, specialized gold facial massage, and deep conditioning hair spa."
   },
   {
-    id: "bridal-groom-royale",
-    title: "Bridal / Groom Royale",
-    category: ["male", "individual"],
-    price: "₹8,000",
-    numericPrice: 8000,
-    duration: "180 min",
-    description: "Full royal styling, premium HD airbrush makeup, active scalp hair treatment, and exclusive consultation for your special day."
-  },
-  {
-    id: "signature-styling",
-    title: "Signature Hair Styling",
+    id: "kera-smooth",
+    title: "Kera Smooth",
     category: ["male", "styling"],
-    price: "₹400",
-    numericPrice: 400,
-    duration: "30 min",
+    price: "₹1,700",
+    numericPrice: 1700,
+    duration: "50 min",
     description: "Precision couture haircuts and custom styling tailored to your facial structure and hair density."
   },
   {
-    id: "male-wig-patch",
-    title: "Wig & Patch",
+    id: "o3-facial",
+    title: "O3+ Facial",
     category: ["male", "treatments"],
-    price: "₹8,000",
-    numericPrice: 8000,
+    price: "₹1,200",
+    numericPrice: 1200,
     duration: "150 min",
     description: "Premium custom hair wig and patch installation tailored to your head structure and hairline."
   },
   {
-    id: "male-bridal-makeup",
-    title: "Bridal Makeup",
-    category: ["male", "individual"],
-    price: "₹15,000",
-    numericPrice: 15000,
-    duration: "240 min",
-    description: "Elite HD airbrush groom/bridal makeup, skin prep, hair setting, and styling for a flawless royal appearance."
+    id: "hydra-facial",
+    title: "Hydra Facial",
+    category: ["male", "treatments"],
+    price: "₹1,000",
+    numericPrice: 1000,
+    duration: "150 min",
+    description: "Premium custom hair wig and patch installation tailored to your head structure and hairline."
   },
+  
   {
     id: "male-perming",
     title: "Perming",
@@ -126,7 +127,7 @@ const services = [
   },
   {
     id: "wig-hair-patch-luxury",
-    title: "Wig & Hair Patch (Luxury)",
+    title: "Wig & Hair Patch",
     category: ["male", "treatments"],
     price: "₹12,000",
     numericPrice: 12000,
@@ -143,6 +144,15 @@ const services = [
     description: "Professional texture styling, root perming, spiral voluming waves with luxury chemical formulas that preserve look and vitality."
   },
   {
+    id: "bridal-groom-royale",
+    title: "Groom Royale",
+    category: ["male", "individual"],
+    price: "₹8,000",
+    numericPrice: 8000,
+    duration: "180 min",
+    description: "Full royal styling, premium HD airbrush makeup, active scalp hair treatment, and exclusive consultation for your special day."
+  },
+  {
     id: "hair-spa-healing",
     title: "Hair Spa & Healing",
     category: ["male", "treatments"],
@@ -151,15 +161,7 @@ const services = [
     duration: "60 min",
     description: "Mineral oil-nourishing scalp massage, custom steam treatment, hydration hair mask, and deep follicular cleansing."
   },
-  {
-    id: "beard-sculpting",
-    title: "Beard Sculpting & Trim",
-    category: ["male", "individual"],
-    price: "₹250",
-    numericPrice: 250,
-    duration: "30 min",
-    description: "Detailed beard design, precision trimmer and straight razor lines, premium sandalwood oil massage."
-  },
+  
 
   // --- FEMALE SERVICES ---
   {
@@ -307,14 +309,14 @@ const services = [
     description: "Luxury metallic chrome finish nail art coating over gel extensions."
   },
   {
-    id: "bridal-makeover",
-    title: "Bridal Royale Makeover",
+    id: "male-bridal-makeup",
+    title: "Bridal Makeup",
     category: ["female", "individual"],
-    price: "₹6,000",
-    numericPrice: 6000,
-    duration: "150 min",
-    description: "High-end luxurious bridal makeover, signature registry makeup, premium hair curls or updos tailored to adornment settings."
-  }
+    price: "₹15,000",
+    numericPrice: 15000,
+    duration: "240 min",
+    description: "Elite HD airbrush groom/bridal makeup, skin prep, hair setting, and styling for a flawless royal appearance."
+  },
 ];
 
 // Barbers / Experts
