@@ -745,7 +745,7 @@ See you soon at Sahil Hair Expert.
           <div className="relative">
             <div className="w-20 h-20 shrink-0 rounded-full border border-luxury-gold/30 bg-black flex items-center justify-center overflow-hidden">
               {/* <Scissors className=" text-luxury-gold" /> */}
-              <img src={Sahil} alt="Sahil_hair_expert" className="w-22 h-22" />
+              <img src={logo} alt="Sahil_hair_expert" className="w-22 h-22" />
             </div>
             <span className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-black rounded-full shadow-lg" />
           </div>
