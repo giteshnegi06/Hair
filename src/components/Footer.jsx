@@ -40,7 +40,7 @@ export default function Footer() {
             </address>
             <div className="text-xs text-luxury-text/80 space-y-1 font-light">
               <span className="text-[9px] uppercase tracking-widest text-luxury-gold font-bold block mb-1">Contact</span>
-              <a href="tel:+919992310449" className="block hover:text-luxury-gold transition-colors">+91 9034273847</a>
+              <a href="tel:+919992310449" className="block hover:text-luxury-gold transition-colors">+91 90342 73847</a>
               <a href="mailto:hello@sahilhairexpert.com" className="block hover:text-luxury-gold transition-colors">hello@sahilhairexpert.com</a>
             </div>
           </div>
