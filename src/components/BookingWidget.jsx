@@ -1741,7 +1741,7 @@ See you soon at Sahil Hair Expert.
                         <span className="text-white font-semibold text-xs block">
                           {selectedMapLocation === "sec34"
                             ? "Sector 34 Branch (Main Studio)"
-                            : "Sector 13 Branch (Premium Lounge)"}
+                            : "Sector 13 Branch (Premium Lounge - Special for woman’s hair treatments)"}
                         </span>
 
                         <span className="text-luxury-text/60 text-xs font-light">
