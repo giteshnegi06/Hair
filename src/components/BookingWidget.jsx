@@ -655,15 +655,49 @@ See you soon at Sahil Hair Expert.
           </div>
         </div>
 
+
         {/* Real-time Business details card */}
-        <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center w-full md:w-auto border-t md:border-t-0 md:border-l border-luxury-text/10 pt-4 md:pt-0 md:pl-8 gap-4 md:gap-1 text-center md:text-right">
-          <div className="text-left md:text-right">
-            <span className="text-[9px] uppercase tracking-widest text-luxury-gold block font-mono">Today Status</span>
-            <span className="text-xs font-semibold text-green-400">Open • Closes 9:30 PM</span>
+        <div className="flex flex-col md:flex-row items-center justify-between md:justify-center gap-3 w-full md:w-auto">
+          <div className="flex md:flex-col gap-4 md:gap-2 items-center">
+            <a
+              href="https://www.instagram.com/sahil__hair_expert?utm_source=qr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-6 h-6 border border-luxury-text/10 hover:border-luxury-gold hover:text-luxury-gold rounded-full flex items-center justify-center transition-all duration-300 text-luxury-text/50 hover:scale-105"
+              aria-label="Instagram"
+            >
+              <Instagram size={12} />
+            </a>
+
+            <a
+              href="https://www.facebook.com/SahilHairStylist/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-6 h-6 border border-luxury-text/10 hover:border-luxury-gold hover:text-luxury-gold rounded-full flex items-center justify-center transition-all duration-300 text-luxury-text/50 hover:scale-105"
+              aria-label="Facebook"
+            >
+              <Facebook size={12} />
+            </a>
+
+            <a
+              href="https://youtube.com/@hairexpertsahil?si=uo1fGLZ_VXCa1CKA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-6 h-6 border border-luxury-text/10 hover:border-luxury-gold hover:text-luxury-gold rounded-full flex items-center justify-center transition-all duration-300 text-luxury-text/50 hover:scale-105"
+              aria-label="YouTube"
+            >
+              <Youtube size={12} />
+            </a>
           </div>
-          <div className="text-right">
-            <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 block font-mono">timezone</span>
-            <span className="text-xs text-luxury-text/70">GMT+05:30 (India)</span>
+          <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center w-full md:w-auto border-t md:border-t-0 md:border-l border-luxury-text/10 pt-4 md:pt-0 md:pl-8 gap-4 md:gap-1 text-center md:text-right">
+            <div className="text-left md:text-right">
+              <span className="text-[9px] uppercase tracking-widest text-luxury-gold block font-mono">Today Status</span>
+              <span className="text-xs font-semibold text-green-400">Open • Closes 9:30 PM</span>
+            </div>
+            <div className="text-right">
+              <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 block font-mono">timezone</span>
+              <span className="text-xs text-luxury-text/70">GMT+05:30 (India)</span>
+            </div>
           </div>
         </div>
       </div>
