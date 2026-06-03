@@ -1,10 +1,14 @@
 function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; } import React, { useState, } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import Logo from "../Images/Logo.jpeg";
+import logo from "../Images/Logo.jpeg";
 import Hairoil from "../Images/Hair oil.jpeg";
 import Rahul from "../Images/Rahul.jpeg";
 import Vicke from "../Images/Vicke.jpeg";
 import Sahil from "../Images/Sahil.jpeg";
+import Hair1 from "../Images/Hair1.jpeg";
+import Hair2 from "../Images/Hair2.jpeg";
+import Hair3 from "../Images/BoostHair.jpeg";
+
 
 import {
 
@@ -384,10 +388,18 @@ const testimonials = [
 // Products Images
 const products = [
   {
-    url: Hairoil,
+    images: [ Hair1, Hairoil, Hair2 ],
     title: "Generic Damage And Protection Hair oil",
     category: "Shop",
-    buyUrl: "https://www.amazon.in/dp/B0G1SY3WWQ"
+    buyUrl: "https://www.amazon.in/dp/B0G1SY3WWQ",
+    btn: "Buy Now"
+  },
+  {
+    images: [ Hair3, ],
+    title: "Breackage & Regrowth Shampoo",
+    category: "Soon",
+    buyUrl: "#",
+    btn: "Coming Soon"
   },
 ];
 
@@ -406,6 +418,115 @@ const businessHours = [
 
 
 
+
+function ProductCard({ product }) {
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const images = product.images || [product.url];
+
+  React.useEffect(() => {
+    if (images.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentIdx((prev) => (prev + 1) % images.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [currentIdx, images.length]);
+
+  const handleNext = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentIdx((prev) => (prev + 1) % images.length);
+  };
+
+  const handlePrev = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentIdx((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  return (
+    <div className="group bg-luxury-text/5 border border-luxury-text/10 rounded-xl overflow-hidden flex flex-col justify-between hover:border-luxury-gold/40 transition-all duration-500 hover:scale-[1.02]">
+      {/* Image Container */}
+      <div className="relative aspect-3/4 overflow-hidden bg-black/40">
+        <img
+          src={images[currentIdx]}
+          alt={product.title}
+          className="w-full h-full object-cover transition-all duration-700"
+          referrerPolicy="no-referrer"
+        />
+
+        {/* Navigation Arrows */}
+        {images.length > 1 && (
+          <>
+            {/* <button
+              onClick={handlePrev}
+              type="button"
+              className="absolute left-2 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-black/60 hover:bg-luxury-gold hover:text-black text-white flex items-center justify-center transition-colors duration-300 z-10 cursor-pointer border border-white/10"
+              aria-label="Previous image"
+            >
+              <ChevronLeft size={14} />
+            </button>
+            <button
+              onClick={handleNext}
+              type="button"
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-black/60 hover:bg-luxury-gold hover:text-black text-white flex items-center justify-center transition-colors duration-300 z-10 cursor-pointer border border-white/10"
+              aria-label="Next image"
+            >
+              <ChevronRight size={14} />
+            </button> */}
+
+            {/* Indicator Dots */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1 z-10">
+              {images.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setCurrentIdx(idx);
+                  }}
+                  type="button"
+                  className={`w-1.5 h-1.5 rounded-full transition-all duration-300 cursor-pointer ${idx === currentIdx ? "bg-luxury-gold w-3" : "bg-white/40"
+                    }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+          </>
+        )}
+
+        {product.category && (
+          <span className="absolute top-3 right-3 text-[8px] uppercase tracking-widest bg-black/80 text-luxury-gold px-2 py-0.5 font-bold rounded font-mono">
+            {product.category}
+          </span>
+        )}
+      </div>
+
+      {/* Info and Action under the Image */}
+      <div className="p-4 flex flex-col justify-between flex-1 gap-4">
+        <div className="space-y-1">
+          <h3 className="text-xs font-semibold tracking-wide text-white group-hover:text-luxury-gold transition-colors duration-300">
+            {product.title}
+          </h3>
+        </div>
+
+        <a
+          href={product.buyUrl || "#"}
+          onClick={(e) => {
+            if (product.buyUrl === "#") {
+              e.preventDefault();
+            }
+          }}
+          target={product.buyUrl !== "#" ? "_blank" : undefined}
+          rel={product.buyUrl !== "#" ? "noopener noreferrer" : undefined}
+          className="w-full py-2 bg-luxury-gold text-black hover:bg-white text-[10px] uppercase tracking-[0.15em] font-extrabold transition-all duration-300 rounded flex items-center justify-center gap-1.5 cursor-pointer shadow-lg shadow-luxury-gold/5"
+        >
+          <ShoppingBag size={10} />
+          {product.btn || "Buy Now"}
+        </a>
+      </div>
+    </div>
+  );
+}
 
 export default function BookingWidget({ activeTab: propActiveTab, setActiveTab: propSetActiveTab } = {}) {
   // Tabs: 'book' | 'experts' | 'reviews' | 'gallery' | 'about'
@@ -624,14 +745,14 @@ See you soon at Sahil Hair Expert.
           <div className="relative">
             <div className="w-20 h-20 shrink-0 rounded-full border border-luxury-gold/30 bg-black flex items-center justify-center overflow-hidden">
               {/* <Scissors className=" text-luxury-gold" /> */}
-              <img src={Logo} alt="Sahil_hair_expert" className="w-22 h-22" />
+              <img src={Sahil} alt="Sahil_hair_expert" className="w-22 h-22" />
             </div>
             <span className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-black rounded-full shadow-lg" />
           </div>
 
           <div className="space-y-1.5">
             <div className="flex flex-col sm:flex-row items-center gap-2">
-              <h1 className="text-2xl md:text-3xl font-serif font-semibold text-white tracking-wide">Sahil Hair Expert</h1>
+              <h1 className="text-2xl md:text-3xl font-serif text-white tracking-wide">Sahil Hair Expert</h1>
               <span className="text-[9px] uppercase tracking-widest bg-luxury-gold/20 text-luxury-gold px-2.5 py-1 font-bold rounded">Karnal Studio</span>
             </div>
 
@@ -654,7 +775,6 @@ See you soon at Sahil Hair Expert.
             </div>
           </div>
         </div>
-
 
         {/* Real-time Business details card */}
         <div className="flex flex-col md:flex-row items-center justify-between md:justify-center gap-3 w-full md:w-auto">
@@ -1500,45 +1620,8 @@ See you soon at Sahil Hair Expert.
 
               {/* Product cards grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {products.map((image, i) => (
-                  <div
-                    key={i}
-                    className="group bg-luxury-text/5 border border-luxury-text/10 rounded-xl overflow-hidden flex flex-col justify-between hover:border-luxury-gold/40 transition-all duration-500 hover:scale-[1.02]"
-                  >
-                    {/* Image Container */}
-                    <div className="relative aspect-3/4 overflow-hidden bg-black/40">
-                      <img
-                        src={image.url}
-                        alt={image.title}
-                        className="w-full h-full object-cover"
-                        referrerPolicy="no-referrer"
-                      />
-                      {image.category && (
-                        <span className="absolute top-3 right-3 text-[8px] uppercase tracking-widest bg-black/80 text-luxury-gold px-2 py-0.5 font-bold rounded font-mono">
-                          {image.category}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Info and Action under the Image */}
-                    <div className="p-4 flex flex-col justify-between flex-1 gap-4">
-                      <div className="space-y-1">
-                        <h3 className="text-xs font-semibold tracking-wide text-white group-hover:text-luxury-gold transition-colors duration-300">
-                          {image.title}
-                        </h3>
-                      </div>
-
-                      <a
-                        href={image.buyUrl || "https://www.amazon.in/dp/B0G1SY3WWQ"}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full py-2 bg-luxury-gold text-black hover:bg-white text-[10px] uppercase tracking-[0.15em] font-extrabold transition-all duration-300 rounded flex items-center justify-center gap-1.5 cursor-pointer shadow-lg shadow-luxury-gold/5"
-                      >
-                        <ShoppingBag size={10} />
-                        Buy Now
-                      </a>
-                    </div>
-                  </div>
+                {products.map((product, i) => (
+                  <ProductCard key={i} product={product} />
                 ))}
               </div>
             </motion.div>

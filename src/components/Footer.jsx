@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="py-24 bg-luxury-bg border-t border-luxury-text/5">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-20">
-          <div className="md:col-span-5">
+          <div className="md:col-span-4">
             <div className="text-3xl font-serif font-bold tracking-tighter mb-8">
               SAHIL <span className="text-luxury-gold">HAIR</span> EXPERT
             </div>
@@ -16,23 +16,31 @@ export default function Footer() {
           </div>
 
           <div className="md:col-span-3">
-            <h4 className="text-[10px] uppercase tracking-[0.5em] font-bold mb-8 text-luxury-gold">Locations</h4>
-            <address className="not-italic text-xs text-luxury-text/80 space-y-4 font-light mb-8">
-              <div>
-                <span className="text-[10px] uppercase tracking-wider text-luxury-gold font-bold block mb-1">Sector 34 Studio</span>
-                <p>Dugra Colony Road, Sec 34, Karnal, Haryana 132001 India</p>
-              </div>
-              <div>
-                <span className="text-[10px] uppercase tracking-wider text-luxury-gold font-bold block mb-1">Sector 13 Studio</span>
-                <p>227L, First Floor, Model Town, Karnal, Haryana 132001</p>
-              </div>
+            <h4 className="text-[11px] uppercase tracking-[0.5em] font-semibold mb-8 text-luxury-gold ">Sector 34 Studio</h4>
+            
+            <address className="not-italic text-xs text-luxury-text/80 space-y-3 font-light mb-6">
+              <p>Dugra Colony Road, Sec 34, Karnal, Haryana 132001 India</p>
             </address>
+            <div className="text-xs text-luxury-text/80 space-y-1 font-light">
+              <span className="text-[9px] uppercase tracking-widest text-luxury-gold font-bold block mb-1">Contact</span>
+              <a href="tel:+919992310449" className="block hover:text-luxury-gold transition-colors">+91 99923 10449</a>
+              <a href="mailto:hello@sahilhairexpert.com" className="block hover:text-luxury-gold transition-colors">hello@sahilhairexpert.com</a>
+            </div>
           </div>
 
-          <div className="w-fit md:col-span-2">
-            <h4 className="text-[10px] uppercase tracking-[0.5em] font-bold mb-8 text-luxury-gold">Contact</h4>
-            <div className="text-sm text-luxury-text/80 space-y-2 font-light">
-              <a href="tel:+919992310449" className="block hover:text-luxury-gold transition-colors">+91 99923 10449</a>
+          <div className="md:col-span-3">
+            <div className="flex flex-col gap-2 mb-3">
+              <h4 className="text-[11px] uppercase tracking-[0.5em] font-semibold text-luxury-gold">Sector 13 Studio</h4>
+              <span className="text-[9px] uppercase tracking-widest bg-amber-500/70 text-black px-2 py-0.5 font-extrabold rounded w-fit">
+                Special for Women's Hair Treatment
+              </span>
+            </div>
+            <address className="not-italic text-xs text-luxury-text/80 space-y-3 font-light mb-6">
+              <p>227L, First Floor, Model Town, Karnal, Haryana 132001</p>
+            </address>
+            <div className="text-xs text-luxury-text/80 space-y-1 font-light">
+              <span className="text-[9px] uppercase tracking-widest text-luxury-gold font-bold block mb-1">Contact</span>
+              <a href="tel:+919992310449" className="block hover:text-luxury-gold transition-colors">+91 9034273847</a>
               <a href="mailto:hello@sahilhairexpert.com" className="block hover:text-luxury-gold transition-colors">hello@sahilhairexpert.com</a>
             </div>
           </div>
