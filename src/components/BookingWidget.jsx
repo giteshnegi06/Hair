@@ -325,30 +325,27 @@ const services = [
 const barbers = [
   {
     id: "any",
-    name: "Any Available Expert",
+    name: "Any Available",
     role: "Fastest Booking Option",
     bio: "Select this option to pair with is any top specialist available at your chosen time.",
     image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=800"
   },
   {
     id: "sahil",
-    name: "Sahil",
-    role: "Founder & Master Stylist",
-    bio: "With over 15 years of expert experience, Sahil specializes in high-end transformations, wigs hair patching, and bridal aesthetics.",
+    name: "Sahil Thakur",
+    role: "Founder & Treatment Specialist",
     image: Sahil
   },
   {
-    id: "vikram",
-    name: "Vikram",
-    role: "Texture & Treatment Specialist",
-    bio: "Expert in heavy texturing, premium perming, hair coloring formulas, and complex non-surgical replacements.",
+    id: "Rahul",
+    name: "Mr. Rahul",
+    role: "Texture & Master Stylist",
     image: Vicke
   },
   {
-    id: "arjun",
-    name: "Arjun",
+    id: "Aman",
+    name: "Mr. Aman",
     role: "Senior Barber Architect",
-    bio: "Classic blade artisan, expert in hyper-detailed tapers, mid to low skin fades, and luxury beard sculpting contours.",
     image: Rahul
   }
 ];
@@ -388,14 +385,14 @@ const testimonials = [
 // Products Images
 const products = [
   {
-    images: [ Hair1, Hairoil, Hair2 ],
+    images: [Hair1, Hairoil, Hair2],
     title: "Generic Damage And Protection Hair oil",
     category: "Shop",
     buyUrl: "https://www.amazon.in/dp/B0G1SY3WWQ",
     btn: "Buy Now"
   },
   {
-    images: [ Hair3, ],
+    images: [Hair3,],
     title: "Breackage & Regrowth Shampoo",
     category: "Soon",
     buyUrl: "#",
@@ -1040,19 +1037,19 @@ See you soon at Sahil Hair Expert.
                   </div>
 
                   {/* Stylists Selector Grid */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
                     {barbers.map((barber) => {
                       const isSelected = _optionalChain([selectedExpert, 'optionalAccess', _4 => _4.id]) === barber.id;
                       return (
                         <div
                           key={barber.id}
                           onClick={() => setSelectedExpert(barber)}
-                          className={`p-4 rounded-xl border transition-all duration-500 cursor-pointer text-center flex flex-col items-center justify-between group
+                          className={`p-2 lg:p-4 rounded-xl border transition-all duration-500 cursor-pointer text-center flex flex-col items-center group
                             ${isSelected
                               ? "bg-luxury-gold/5 border-luxury-gold shadow-lg shadow-luxury-gold/5"
                               : "bg-luxury-text/5 border-luxury-text/10 hover:border-luxury-gold/40"}`}
                         >
-                          <div className={`w-20 h-20 rounded-full overflow-hidden border-2 mb-4 group-hover:scale-105 transition-transform duration-500
+                          <div className={`w-18 h-18 rounded-full overflow-hidden border-2 mb-4 group-hover:scale-105 transition-transform duration-500
                             ${isSelected ? "border-luxury-gold" : "border-luxury-text/10"}`}
                           >
                             <img
@@ -1062,16 +1059,13 @@ See you soon at Sahil Hair Expert.
                             />
                           </div>
 
-                          <div className="space-y-1">
+                          <div className="space-y-1.5 flex-1 flex flex-col items-center justify-start w-full">
                             <h3 className="text-sm font-semibold text-white group-hover:text-luxury-gold transition-colors block">
                               {barber.name}
                             </h3>
                             <span className="text-[9px] uppercase tracking-wider text-luxury-gold bg-luxury-gold/10 px-2 py-0.5 rounded font-bold font-mono">
                               {barber.role}
                             </span>
-                            <p className="text-[11px] text-luxury-text/50 font-light leading-relaxed line-clamp-3 pt-2">
-                              {barber.bio}
-                            </p>
                           </div>
 
                           <button
@@ -1486,7 +1480,7 @@ See you soon at Sahil Hair Expert.
                 <p className="text-xs text-luxury-text/50">Our elite styling team pairs traditional, heritage razor skills with contemporary hair perming & restoration aesthetics.</p>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {barbers
                   .filter(b => b.id !== "any") // hide the mock 'any' option in informational list
                   .map((stylist) => (
@@ -1509,9 +1503,6 @@ See you soon at Sahil Hair Expert.
                         <span className="text-[9px] uppercase tracking-wider text-luxury-gold bg-luxury-gold/10 px-2 py-0.5 rounded font-bold font-mono">
                           {stylist.role}
                         </span>
-                        {/* <p className="text-[11px] text-luxury-text/50 font-light leading-relaxed pt-2 pb-4 line-clamp-3">
-                          {stylist.bio}
-                        </p> */}
                       </div>
 
                       {/* Booking shortcut CTA */}
@@ -1673,7 +1664,7 @@ See you soon at Sahil Hair Expert.
                       <span className="text-xs font-semibold text-white font-mono"> +91 90342 73847</span>
                     </a>
 
-                    
+
                   </div>
                 </div>
 
@@ -1698,8 +1689,8 @@ See you soon at Sahil Hair Expert.
                     <div className="flex justify-center md:justify-start items-center text-center gap-3 p-4 ">
                       <Clock className="w-5 h-5 text-luxury-gold " />
                       <div className="ml-3">
-                      <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 block font-mono">Walk-Ins policy</span>
-                      <span className="text-xs font-semibold text-white tracking-wider">Appts Priority</span>
+                        <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 block font-mono">Walk-Ins policy</span>
+                        <span className="text-xs font-semibold text-white tracking-wider">Appts Priority</span>
                       </div>
                     </div>
                   </div>
