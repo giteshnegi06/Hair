@@ -1656,18 +1656,24 @@ See you soon at Sahil Hair Expert.
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-luxury-text/10">
                     <a
                       href="tel:+919992310449"
-                      className="p-4 bg-luxury-text/5 border border-luxury-text/10 hover:border-luxury-gold/50 rounded-xl block group transition-colors duration-300"
+                      className="relative h-fit p-4 bg-luxury-text/5 border border-luxury-text/10 hover:border-luxury-gold/50 rounded-xl block group transition-colors duration-300"
                     >
+                      <span className=" absolute top-2 right-3 text-[8px] uppercase tracking-widest bg-amber-500/70 text-black px-2 py-0.5 font-extrabold rounded w-fit animate-pulse duration-200">Branch 1</span>
                       <Phone className="w-5 h-5 text-luxury-gold mb-2 group-hover:bounce" />
                       <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 block font-mono">Phone Support</span>
                       <span className="text-xs font-semibold text-white font-mono">+91 99923 10449</span>
                     </a>
+                    <a
+                      href="tel:+919034273847"
+                      className="relative h-fit p-4 bg-luxury-text/5 border border-luxury-text/10 hover:border-luxury-gold/50 rounded-xl block group transition-colors duration-300"
+                    >
+                      <span className=" absolute top-2 right-3 text-[8px] uppercase tracking-widest bg-amber-500/70 text-black px-2 py-0.5 font-extrabold rounded w-fit animate-pulse duration-200">Branch 2</span>
+                      <Phone className="w-5 h-5 text-luxury-gold mb-2 group-hover:bounce" />
+                      <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 block font-mono">Phone Support</span>
+                      <span className="text-xs font-semibold text-white font-mono"> +91 90342 73847</span>
+                    </a>
 
-                    <div className="p-4 bg-luxury-text/5 border border-luxury-text/10 rounded-xl">
-                      <Clock className="w-5 h-5 text-luxury-gold mb-2" />
-                      <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 block font-mono">Walk-Ins policy</span>
-                      <span className="text-xs font-semibold text-white">Appts Priority</span>
-                    </div>
+                    
                   </div>
                 </div>
 
@@ -1689,6 +1695,13 @@ See you soon at Sahil Hair Expert.
                         </div>
                       </div>
                     ))}
+                    <div className="flex justify-center md:justify-start items-center text-center gap-3 p-4 ">
+                      <Clock className="w-5 h-5 text-luxury-gold " />
+                      <div className="ml-3">
+                      <span className="text-[9px] uppercase tracking-widest text-luxury-text/40 block font-mono">Walk-Ins policy</span>
+                      <span className="text-xs font-semibold text-white tracking-wider">Appts Priority</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
