@@ -47,7 +47,7 @@ export default function Footer() {
 
           <div className="md:col-span-2">
             <h4 className="text-[10px] uppercase tracking-[0.5em] font-bold mb-8 text-luxury-gold">Social</h4>
-            <div className="flex flex-col gap-2">
+            <div className="flex md:flex-col gap-2">
               <a
                 href="https://www.instagram.com/sahil__hair_expert?utm_source=qr"
                 target="_blank"
