@@ -145,15 +145,7 @@ const services = [
     duration: "180 min",
     description: "Full royal styling, premium HD airbrush makeup, active scalp hair treatment, and exclusive consultation for your special day."
   },
-  {
-    id: "hair-spa-healing",
-    title: "Hair Spa & Healing",
-    category: ["male", "treatments"],
-    price: "₹1,200",
-    numericPrice: 1200,
-    duration: "60 min",
-    description: "Mineral oil-nourishing scalp massage, custom steam treatment, hydration hair mask, and deep follicular cleansing."
-  },
+  
 
 
   // --- FEMALE SERVICES ---
