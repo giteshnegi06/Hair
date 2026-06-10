@@ -137,15 +137,6 @@ const services = [
     description: "Non-surgical high-density medical grade custom hair patches and wigs. Features custom clipping/grafting for high natural looks."
   },
   {
-    id: "perming-texture",
-    title: "Perming & Texture Art",
-    category: ["male", "treatments"],
-    price: "₹3,500",
-    numericPrice: 3500,
-    duration: "90 min",
-    description: "Professional texture styling, root perming, spiral voluming waves with luxury chemical formulas that preserve look and vitality."
-  },
-  {
     id: "bridal-groom-royale",
     title: "Groom Royale",
     category: ["male", "individual"],
