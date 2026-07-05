@@ -1,6 +1,6 @@
 function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; } import React, { useState, } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import logo from "../Images/Logo.jpeg";
+import logo from "../Images/Logo (2).png";
 import Hairoil from "../Images/Hair oil.jpeg";
 import Rahul from "../Images/Rahul.jpeg";
 import Vicke from "../Images/Vicke.jpeg";
@@ -91,18 +91,18 @@ const services = [
     description: "Premium custom hair wig and patch installation tailored to your head structure and hairline."
   },
   {
-    id: "hydra-facial",
-    title: "Hydra Facial",
+    id: "hair-dread-locks",
+    title: "Dreadlocks",
     category: ["male", "Individual"],
-    price: "₹1,000",
-    numericPrice: 1000,
+    price: "₹6,000",
+    numericPrice: 6000,
     duration: "150 min",
-    description: "Premium custom hair wig and patch installation tailored to your head structure and hairline."
+    description: "Professional dreadlock styling and maintenance for a unique, textured look with long-lasting results."
   },
 
   {
     id: "male-perming",
-    title: "Perming",
+    title: "Hair Perming",
     category: ["male", "treatments"],
     price: "₹2,000",
     numericPrice: 2000,
@@ -119,13 +119,13 @@ const services = [
     description: "Long-lasting permanent curl styling treatment with advanced protective hair formulas."
   },
   {
-    id: "male-hair-spa",
-    title: "Hair Spa",
+    id: "male-hair-extensions",
+    title: "Hair Extensions",
     category: ["male", "treatments"],
-    price: "₹500",
-    numericPrice: 500,
-    duration: "30 min",
-    description: "Nourishing scalp massage, steam treatment, and deep conditioning for hair rejuvenation."
+    price: "₹8,000",
+    numericPrice: 8000,
+    duration: "120 min",
+    description: "Non-surgical high-density medical grade hair extensions for added length, volume, and natural blending."
   },
   {
     id: "wig-hair-patch-luxury",
@@ -725,7 +725,7 @@ See you soon at Sahil Hair Expert.
           <div className="relative">
             <div className="w-20 h-20 shrink-0 rounded-full border border-luxury-gold/30 bg-black flex items-center justify-center overflow-hidden">
               {/* <Scissors className=" text-luxury-gold" /> */}
-              <img src={logo} alt="Sahil_hair_expert" className="w-22 h-22" />
+              <img src={logo} alt="Sahil_hair_expert" className="w-30 h-28 rounded-3xl" />
             </div>
             <span className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-black rounded-full shadow-lg" />
           </div>
