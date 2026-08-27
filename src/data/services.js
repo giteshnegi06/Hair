@@ -71,6 +71,15 @@ export const services = [
     description: "Long-lasting permanent curl styling treatment with advanced protective hair formulas."
   },
   {
+    id: "re-growth-curly-adv",
+    title: "Re-Growth Curly ADV",
+    category: ["male", "individual"],
+    price: "₹3,000",
+    numericPrice: 3000,
+    duration: "180 min",
+    description: "Full royal styling, premium HD airbrush makeup, active scalp hair treatment, and exclusive consultation for your special day."
+  },
+  {
     id: "male-hair-extensions",
     title: "Hair Extensions",
     category: ["male", "treatments"],
@@ -88,15 +97,7 @@ export const services = [
     duration: "120 min",
     description: "Non-surgical high-density medical grade custom hair patches and wigs. Features custom clipping/grafting for high natural looks."
   },
-  {
-    id: "bridal-groom-royale",
-    title: "Re-Growth Curly ADV",
-    category: ["male", "individual"],
-    price: "₹3,000",
-    numericPrice: 3000,
-    duration: "180 min",
-    description: "Full royal styling, premium HD airbrush makeup, active scalp hair treatment, and exclusive consultation for your special day."
-  },
+  
 
 
 
