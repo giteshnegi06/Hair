@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://sahilhairexpert.com/</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <mobile:mobile/>
+  </url>
+
+  <!-- Book Appointment Section -->
+  <url>
+    <loc>https://sahilhairexpert.com/#book</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <mobile:mobile/>
+  </url>
+
+  <!-- Shop Products Section -->
+  <url>
+    <loc>https://sahilhairexpert.com/#shop</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>bi-weekly</changefreq>
+    <priority>0.85</priority>
+    <mobile:mobile/>
+  </url>
+
+  <!-- Reviews Section -->
+  <url>
+    <loc>https://sahilhairexpert.com/#reviews</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+    <mobile:mobile/>
+  </url>
+
+  <!-- Hours & Info Section -->
+  <url>
+    <loc>https://sahilhairexpert.com/#about</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <mobile:mobile/>
+  </url>
+
+  <!-- Products with Images -->
+  <url>
+    <loc>https://sahilhairexpert.com/#shop</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>bi-weekly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://sahilhairexpert.com/src/Images/Damage%20%26%20Protection%20Hair%20oil.jpeg</image:loc>
+      <image:title>Damage and Protection Hair Oil</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://sahilhairexpert.com/src/Images/BREAKAGE%20%26%20REGROWTH%20SHAMPOO.jpeg</image:loc>
+      <image:title>Breakage and Regrowth Shampoo</image:title>
+    </image:image>
+    <mobile:mobile/>
+  </url>
+
+</urlset>
