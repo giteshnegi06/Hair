@@ -63,7 +63,7 @@ export const services = [
   },
   {
     id: "male-curl-permanent",
-    title: "Curly ADV Treatment",
+    title: "ADV Curly Zig Zag",
     category: ["male", "treatments"],
     price: "₹5,000",
     numericPrice: 5000,
@@ -72,7 +72,7 @@ export const services = [
   },
   {
     id: "re-growth-curly-adv",
-    title: "Re-Growth Curly ADV",
+    title: "Curly Zig Zag",
     category: ["male", "individual"],
     price: "₹3,000",
     numericPrice: 3000,

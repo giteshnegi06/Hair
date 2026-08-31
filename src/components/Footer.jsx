@@ -25,18 +25,18 @@ export default function Footer() {
               <div className="text-xs text-luxury-text/80 space-y-1 font-light">
               <span className="text-xs uppercase tracking-widest text-luxury-gold font-bold block mb-1">Contact</span>
               <a href="tel:+919992310449" className="block hover:text-luxury-gold transition-colors">+91 99923 10449</a>
-              <a href="mailto:hello@sahilhairexpert.com" className="block hover:text-luxury-gold transition-colors">teamsahilhairexpert@gmail.com</a>
+              <a href="mailto:teamsahilhairexpert@gmail.com" className="block hover:text-luxury-gold transition-colors">teamsahilhairexpert@gmail.com</a>
             </div>
             <div className="text-xs text-luxury-text/80 space-y-1 font-light">
               <span className="text-xs uppercase tracking-widest text-luxury-gold font-bold block mb-1">Academy</span>
-              <a href="tel:+919992310449" className="block hover:text-luxury-gold transition-colors">+91 90342 73847</a>            
+              <a href="tel:+919034273847" className="block hover:text-luxury-gold transition-colors">+91 90342 73847</a>
               </div>
             </div>
           </div>
 
           <div className="md:col-span-3">
             <div className="flex flex-col gap-2 mb-3">
-              <h4 className="text-[9px] uppercase tracking-[0.5em] font-semibold text-luxury-gold">Comming Soon At</h4>
+              <h4 className="text-[9px] uppercase tracking-[0.5em] font-semibold text-luxury-gold">Coming Soon At</h4>
               <span className="text-xs uppercase tracking-widest bg-amber-500/70 text-black px-2 py-0.5 font-extrabold rounded w-fit animate-pulse">
                 Delhi
               </span>

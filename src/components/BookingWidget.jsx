@@ -141,9 +141,9 @@ function ProductCard({ product }) {
             }}
             target={product.buyUrl !== "#" ? "_blank" : undefined}
             rel={product.buyUrl !== "#" ? "noopener noreferrer" : undefined}
-            className="w-full py-2.5 bg-luxury-gold text-black hover:bg-white text-[11px] uppercase tracking-[0.15em] font-extrabold transition-all duration-300 rounded-lg flex items-center justify-center gap-1.5 cursor-pointer shadow-lg shadow-luxury-gold/20 hover:shadow-luxury-gold/30 md:shadow-lg md:shadow-luxury-gold/30 md:hover:shadow-luxury-gold/40 sm:animate-pulse md:animate-none sm:shadow-xl sm:shadow-luxury-gold/40"
+            className="w-full py-3 bg-linear-to-r from-luxury-gold via-yellow-300 to-luxury-gold bg-size-[200%_auto] hover:bg-right text-black text-[12px] uppercase tracking-[0.15em] font-extrabold transition-all duration-500 rounded-lg flex items-center justify-center gap-1.5 cursor-pointer shadow-lg shadow-luxury-gold/40 hover:shadow-xl hover:shadow-luxury-gold/60 animate-pulse hover:animate-none hover:scale-105 active:scale-95 ring-2 ring-luxury-gold/30 hover:ring-luxury-gold"
           >
-            <ShoppingBag size={12} />
+            <ShoppingBag size={14} className="animate-bounce" />
             {product.btn || "Buy Now"}
           </a>
         </div>
@@ -354,14 +354,14 @@ See you soon at Sahil Hair Expert.
           <div className="relative">
             <div className="w-20 h-20 shrink-0 rounded-full border border-luxury-gold/30 bg-black flex items-center justify-center overflow-hidden">
               {/* <Scissors className=" text-luxury-gold" /> */}
-              <img src={logo} alt="Sahil_hair_expert" className="w-full h-full object-cover rounded-full" />
+              <img src={logo} alt="Sahil Hair Expert - Premium Hair Salon in Karnal, Haryana" className="w-full h-full object-cover rounded-full" />
             </div>
             <span className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 border-2 border-black rounded-full shadow-lg" />
           </div>
 
           <div className="space-y-1.5">
             <div className="flex justify-center md:justify-start items-center gap-2">
-              <h1 className="text-2xl md:text-3xl font-serif text-white tracking-wide">Sahil Hair Expert</h1>
+              <h1 className="text-2xl md:text-3xl font-serif text-white tracking-wide">Sahil Hair Expert — Premier Hair Salon in Karnal</h1>
               {/* <span className="text-[9px] uppercase tracking-widest bg-luxury-gold/20 text-luxury-gold px-2.5 py-1 font-bold rounded">Karnal Studio</span> */}
             </div>
 
