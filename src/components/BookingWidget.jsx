@@ -567,7 +567,7 @@ See you soon at Sahil Hair Expert.
                           >
                             <div className="space-y-1.5">
                               <div className="flex justify-between items-start gap-2">
-                                <h3 className="text-sm font-semibold tracking-wide text-white group-hover:text-luxury-gold transition-colors duration-300">
+                                <h3 className="text-sm font-semibold tracking-wide text-white group-hover:text-luxury-gold transition-colors duration-300 text-balance">
                                   {service.title}
                                 </h3>
                                 <span className="text-sm font-bold text-luxury-gold font-mono whitespace-nowrap">
