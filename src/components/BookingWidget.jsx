@@ -361,7 +361,7 @@ See you soon at Sahil Hair Expert.
 
           <div className="space-y-1.5">
             <div className="flex justify-center md:justify-start items-center gap-2">
-              <h1 className="text-2xl md:text-3xl font-serif text-white tracking-wide">Sahil Hair Expert — Premier Hair Salon in Karnal</h1>
+              <h1 className="text-2xl md:text-3xl font-serif text-white tracking-wide">Sahil Hair Expert</h1>
               {/* <span className="text-[9px] uppercase tracking-widest bg-luxury-gold/20 text-luxury-gold px-2.5 py-1 font-bold rounded">Karnal Studio</span> */}
             </div>
 

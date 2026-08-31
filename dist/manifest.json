@@ -27,52 +27,52 @@
   ],
   "icons": [
     {
-      "src": "./src/Images/logo.jpeg",
+      "src": "./favicon/logo-32.png",
       "sizes": "32x32",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./src/Images/logo.jpeg",
+      "src": "./favicon/logo-64.png",
       "sizes": "64x64",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./src/Images/logo.jpeg",
+      "src": "./favicon/logo-96.png",
       "sizes": "96x96",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./src/Images/logo.jpeg",
+      "src": "./favicon/logo-128.png",
       "sizes": "128x128",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./src/Images/logo.jpeg",
+      "src": "./favicon/logo-192.png",
       "sizes": "192x192",
-      "type": "image/jpeg",
-      "purpose": "any maskable"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "./src/Images/logo.jpeg",
+      "src": "./favicon/logo-256.png",
       "sizes": "256x256",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./src/Images/logo.jpeg",
+      "src": "./favicon/logo-384.png",
       "sizes": "384x384",
-      "type": "image/jpeg",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./src/Images/logo.jpeg",
+      "src": "./favicon/logo-512.png",
       "sizes": "512x512",
-      "type": "image/jpeg",
-      "purpose": "any maskable"
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "shortcuts": [
@@ -83,9 +83,9 @@
       "url": "/?tab=book",
       "icons": [
         {
-          "src": "./src/Images/logo.jpeg",
+          "src": "./favicon/logo-96.png",
           "sizes": "96x96",
-          "type": "image/jpeg"
+          "type": "image/png"
         }
       ]
     },
@@ -96,9 +96,9 @@
       "url": "/?tab=shop",
       "icons": [
         {
-          "src": "./src/Images/logo.jpeg",
+          "src": "./favicon/logo-96.png",
           "sizes": "96x96",
-          "type": "image/jpeg"
+          "type": "image/png"
         }
       ]
     }
