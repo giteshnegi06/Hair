@@ -1,0 +1,107 @@
+{
+  "name": "Sahil Hair Expert - Premium Hair Salon",
+  "short_name": "Sahil Hair",
+  "description": "Premium luxury hair styling, bridal makeup, and advanced zig-zag curly hair treatment studio in Karnal, Haryana.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0a0a0a",
+  "theme_color": "#c5a059",
+  "dir": "ltr",
+  "lang": "en",
+  "categories": ["shopping", "business"],
+  "screenshots": [
+    {
+      "src": "./src/Images/logo.jpeg",
+      "sizes": "540x720",
+      "form_factor": "narrow",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "./src/Images/logo.jpeg",
+      "sizes": "1280x720",
+      "form_factor": "wide",
+      "type": "image/jpeg"
+    }
+  ],
+  "icons": [
+    {
+      "src": "./src/Images/logo.jpeg",
+      "sizes": "32x32",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "./src/Images/logo.jpeg",
+      "sizes": "64x64",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "./src/Images/logo.jpeg",
+      "sizes": "96x96",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "./src/Images/logo.jpeg",
+      "sizes": "128x128",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "./src/Images/logo.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./src/Images/logo.jpeg",
+      "sizes": "256x256",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "./src/Images/logo.jpeg",
+      "sizes": "384x384",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "./src/Images/logo.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Book Appointment",
+      "short_name": "Book",
+      "description": "Quick booking for hair services",
+      "url": "/?tab=book",
+      "icons": [
+        {
+          "src": "./src/Images/logo.jpeg",
+          "sizes": "96x96",
+          "type": "image/jpeg"
+        }
+      ]
+    },
+    {
+      "name": "Shop Products",
+      "short_name": "Shop",
+      "description": "Browse our premium hair care products",
+      "url": "/?tab=shop",
+      "icons": [
+        {
+          "src": "./src/Images/logo.jpeg",
+          "sizes": "96x96",
+          "type": "image/jpeg"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false
+}
